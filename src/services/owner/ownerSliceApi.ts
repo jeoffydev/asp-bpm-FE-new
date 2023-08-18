@@ -44,6 +44,15 @@ export interface IOwnerRegisterSubmit extends IOwnerRegDefault {
   active: boolean,
 }
 
+export interface IOwnerEditSubmit {
+  fullName: string,
+  roleId: number,
+  password: string,
+  confirmPassword: string,
+  active: boolean,
+  id: number
+}
+
 export const emptyOwnerAdminState: IOwnerAdminAuthState = {
     id: 0,
     email: '',
@@ -132,6 +141,20 @@ export const ownerApiSlice =  createApi({
         },
         invalidatesTags: ['allOwners'], 
     }),
+    getOwnerId: builder.query({
+      query: (editId:number) => editId ? `${apiUrl}/owner/${editId}` : `${apiUrlNoresult}`,
+      providesTags: ['allOwners'],
+    }),
+    updateOwner: builder.mutation({
+      query: (payload) => { 
+        return {
+          url: `${apiUrl}/updateOwner`,
+          method: 'PUT',
+          body: payload,
+        }
+      },
+      invalidatesTags: ['allOwners'],
+    }),
      
   }),
 })
@@ -142,6 +165,8 @@ export const {
    useGetAdminUserListQuery,
    useGetOwnerUserListQuery,
    useRegisterOwnerMutation,
-   useDeleteOwnerMutation
+   useDeleteOwnerMutation,
+   useGetOwnerIdQuery,
+   useUpdateOwnerMutation
 } = ownerApiSlice
 

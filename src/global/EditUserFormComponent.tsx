@@ -1,7 +1,7 @@
-
+import { useEffect} from 'react';
 import { useForm } from "react-hook-form"
 import { styled } from '@mui/material/styles'; 
-import { IOwnerRegister } from '../services/owner/ownerSliceApi';
+import { IOwnerRegister, IOwnerTypeView } from '../services/owner/ownerSliceApi';
 import { colours } from "../utils/Helper";
 
 const FormWrapper = styled('form')({
@@ -42,26 +42,56 @@ const FormWrapper = styled('form')({
 
 
 interface IProps {
-    onSubmitHandle: (data: IOwnerRegister) => void,
+    onSubmitEdit: (data: IOwnerRegister) => void,
+    editDetails: IOwnerTypeView
 } 
-const RegisterUserFormComponent = (props: IProps) => {
+const EditUserFormComponent = (props: IProps) => {
 
-    const { onSubmitHandle } = props;
+    const { onSubmitEdit, editDetails } = props;
+
+    console.log("editDetails EDIT FORM ", editDetails)
 
     const {
         register,
         handleSubmit,
+        setValue,
         formState: { errors: errorForm },
       } = useForm<IOwnerRegister>();
 
+          useEffect(() => {
+            if ( editDetails ) {
+                const fixToType: IOwnerRegister = {
+                        fullName: editDetails?.fullName as string,
+                        email: editDetails?.email as string,
+                        roleId: editDetails?.authRoleId as number,
+                        password: '',
+                        confirmPassword: '',
+                        active: editDetails?.active.toString() as string
+                }
+                const arrEdit =   [fixToType]; 
+                console.log("ARR EDIT ", arrEdit)
+                console.count("USEEFFECT ")
+                const fields = ['fullName', 'email', 'roleId', 'password', 'confirmPassword', 'active'];
+                //@ts-ignore
+                fields.forEach(field => setValue(field, arrEdit[0][field]));
+                //setValue(field, arrEdit[0][field]
+                // const editFinal = arrEdit.map((d) => {
+                //     setValue(`${d[0]}`, `${d[1]}`);
+                // })  
+                //setValue();
+            }
+      },[
+        editDetails
+      ])
+
 
     return (
-        <FormWrapper onSubmit={handleSubmit(onSubmitHandle)} style={{width: '100%', minWidth: 340}}>
+        <FormWrapper onSubmit={handleSubmit(onSubmitEdit)} style={{width: '100%', minWidth: 340}}>
             <label>Name:</label>
             <input type='text'  {...register("fullName", { required: true })} />
             {errorForm.fullName && <span>Name field is required</span>}
             <label>Email Address:</label>
-            <input type='email'  {...register("email", { required: true })} />
+            <input type='email' disabled {...register("email", { required: true })} />
             {errorForm.email && <span>Email field is required</span>}
             <label>Active</label>
             <select {...register("active")}>
@@ -86,5 +116,5 @@ const RegisterUserFormComponent = (props: IProps) => {
     )
 }
 
-export default RegisterUserFormComponent;
+export default EditUserFormComponent;
 

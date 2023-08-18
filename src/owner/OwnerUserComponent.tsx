@@ -1,5 +1,5 @@
 
-import {  IOwnerRegister, IOwnerRegisterSubmit, useGetAdminUserListQuery, useGetOwnerUserListQuery, useRegisterOwnerMutation } from '../services/owner/ownerSliceApi';
+import {  IOwnerEditSubmit, IOwnerRegister, IOwnerRegisterSubmit, useGetAdminUserListQuery, useGetOwnerIdQuery, useGetOwnerUserListQuery, useRegisterOwnerMutation, useUpdateOwnerMutation } from '../services/owner/ownerSliceApi';
 import { useSelector } from 'react-redux';
 import { selectUserToken } from '../store/selectors';
 import LoadingComponent from '../global/LoadingComponent';
@@ -19,6 +19,7 @@ import FloatingErrorComponent from '../global/FloatingErrorComponent';
 import DialogSimpleComponent from '../global/DialogSimpleComponent';
 import { GridColDef } from '@mui/x-data-grid';
 import useHookErrorFieldResponse from '../hooks/useHookErrorFieldResponse';
+import EditUserFormComponent from '../global/EditUserFormComponent';
 
 const ButtonFab = styled(Fab)({ 
   backgroundColor: colours.primaryBlue,
@@ -30,19 +31,25 @@ function OwnerUserComponent() {
 const getToken = useSelector(selectUserToken);   
 const [openModal, setOpenModal] = useState(false);
 const [isEdit, setIsEdit] = useState(false);
+const [editId, setEditId] = useState(0);
 
 const [registerOwner, responseRegisterOwner] = useRegisterOwnerMutation();
-const [errors, ] = useHookErrorFieldResponse({ response:  responseRegisterOwner});
+const [updateOwner, responseUpdateOwner] = useUpdateOwnerMutation();
 
+const returnErrors = responseRegisterOwner?.isError ? responseRegisterOwner :  responseUpdateOwner;
+
+const [errors, ] = useHookErrorFieldResponse({ response:  returnErrors });
 
 const checkToken = getToken ? true : false;
 const { data: dataOwners, isLoading: ownerLoading, isError: ownerError } =  useGetOwnerUserListQuery( { checkToken }, { refetchOnMountOrArgChange: true });
-const { data: dataAdmins, isLoading: adminLoading, isError: adminError } =  useGetAdminUserListQuery( { checkToken }, { refetchOnMountOrArgChange: true });
 
-const loading: boolean = ownerLoading || adminLoading;
+const { data: dataOwnerIdDetails, isLoading: ownerIdLoading, isError: ownerIdError }= useGetOwnerIdQuery( editId );
+
+
+const loading: boolean = ownerLoading || ownerIdLoading;
 
     useEffect(()=>{
-        if( responseRegisterOwner.isSuccess ) {
+        if( responseRegisterOwner.isSuccess) {
             setOpenModal(false);
         }
 
@@ -52,24 +59,45 @@ const loading: boolean = ownerLoading || adminLoading;
 
   const handleClose = () => {
     setOpenModal(false);
+    setIsEdit(false);
+    setEditId(0);
   };
 
   const onSubmitHandle = (data: IOwnerRegister) => {
+    
+      var activeBool = (data.active === "true");
+      const dataFilter: IOwnerRegisterSubmit = {
+          fullName: data.fullName,
+          roleId: Number(data.roleId),
+          active: activeBool,
+          email: data.email,
+          password: data.password,
+          confirmPassword: data.confirmPassword
+      }
+      registerOwner(dataFilter);
+   
+  }
+
+  const onSubmitEdit = (data: IOwnerRegister) => {
+
     var activeBool = (data.active === "true");
-    const dataFilter: IOwnerRegisterSubmit = {
-        fullName: data.fullName,
-        roleId: Number(data.roleId),
-        active: activeBool,
-        email: data.email,
-        password: data.password,
-        confirmPassword: data.confirmPassword
-    }
-    registerOwner(dataFilter);
+      const dataFilter: IOwnerEditSubmit = {
+          id: editId,
+          fullName: data.fullName,
+          roleId: Number(data.roleId),
+          active: activeBool,
+          password: data.password,
+          confirmPassword: data.confirmPassword
+      }
+      updateOwner(dataFilter);
   }
 
   const editHandle = (id: number) => {
-    console.log("EDIT HANDLE ", id)
+    setEditId(id);
+    setIsEdit(true)
+    setOpenModal(true);
   }
+
 
 
 return (
@@ -81,7 +109,11 @@ return (
      {
         (responseRegisterOwner?.isError && !responseRegisterOwner?.isSuccess) && (
             <>
-            <FloatingErrorComponent open={responseRegisterOwner.isError || !openModal} errors={errors} />
+              <FloatingErrorComponent open={
+                  returnErrors?.isError || !openModal
+                } 
+                errors={errors} 
+              />
             </>
         )
      }
@@ -108,11 +140,11 @@ return (
     </Box>
 
        <DialogSimpleComponent 
-            heading='Add Owner' 
+            heading= { isEdit ? 'Edit Owner' : 'Add Owner' }
             handleClose={handleClose} 
-            openModal={openModal}
+            openModal={openModal || isEdit}
         >
-            <RegisterUserFormComponent isEdit={isEdit} onSubmitHandle={onSubmitHandle} />
+            { isEdit ? <EditUserFormComponent editDetails={dataOwnerIdDetails?.data} onSubmitEdit={onSubmitEdit} />  : <RegisterUserFormComponent  onSubmitHandle={onSubmitHandle} /> }
        </DialogSimpleComponent>
    </BodyContainerComponent>
   );

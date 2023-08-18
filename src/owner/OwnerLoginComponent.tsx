@@ -43,7 +43,6 @@ const OwnerLoginComponent = () => {
         formState: { errors: errorForm },
       } = useForm<Inputs>();
       const [addOwner, responseAddOwner] = useAddOwnerMutation();
-      console.log("responseAddOwner ", responseAddOwner)
       const [errors, ] = useHookErrorFieldResponse({ response: responseAddOwner});
       useAuthenticationUser({ 
         responseAuth: responseAddOwner?.data?.data,

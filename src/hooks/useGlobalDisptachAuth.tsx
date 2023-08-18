@@ -7,7 +7,6 @@ import { retrieveAuthToStorage } from '../auth/authHelper';
 const  useGlobalDispatchAuth = () => {
     const dispatch = useDispatch();
     const auth  = retrieveAuthToStorage();
-    console.log("AUTH ", auth)
    
     useEffect(() => {
 

@@ -10,8 +10,6 @@ export const ProtectedOwnerRouteComponent  = () => {
   const outlet = useOutlet();
 
   const [isAuthenticated, isRoleName] = useGlobalDispatchAuth();
-  console.log("IS AUTH ", isAuthenticated)
-  console.log("IS ROLE NAME ", isRoleName)
 
   if ((!isAuthenticated as boolean || !isAuthenticated) && ((isRoleName && (isRoleName as string).toLowerCase().match(ownerRole.toLowerCase())) || !isRoleName)) {
       return <Navigate to="/owner" />;
