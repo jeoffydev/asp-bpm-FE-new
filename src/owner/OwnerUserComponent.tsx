@@ -1,5 +1,5 @@
 
-import {  IOwnerEditSubmit, IOwnerRegister, IOwnerRegisterSubmit, useGetAdminUserListQuery, useGetOwnerIdQuery, useGetOwnerUserListQuery, useRegisterOwnerMutation, useUpdateOwnerMutation } from '../services/owner/ownerSliceApi';
+import {  IOwnerRegister, IOwnerRegisterSubmit,  useGetOwnerUserListQuery, useRegisterOwnerMutation } from '../services/owner/ownerSliceApi';
 import { useSelector } from 'react-redux';
 import { selectUserToken } from '../store/selectors';
 import LoadingComponent from '../global/LoadingComponent';
@@ -19,7 +19,6 @@ import FloatingErrorComponent from '../global/FloatingErrorComponent';
 import DialogSimpleComponent from '../global/DialogSimpleComponent';
 import { GridColDef } from '@mui/x-data-grid';
 import useHookErrorFieldResponse from '../hooks/useHookErrorFieldResponse';
-import EditUserFormComponent from '../global/EditUserFormComponent';
 
 const ButtonFab = styled(Fab)({ 
   backgroundColor: colours.primaryBlue,
@@ -27,30 +26,27 @@ const ButtonFab = styled(Fab)({
 });  
 
 function OwnerUserComponent() {
-
+ 
 const getToken = useSelector(selectUserToken);   
 const [openModal, setOpenModal] = useState(false);
-const [isEdit, setIsEdit] = useState(false);
-const [editId, setEditId] = useState(0);
+const [openError, setOpenError] = useState(false);
 
 const [registerOwner, responseRegisterOwner] = useRegisterOwnerMutation();
-const [updateOwner, responseUpdateOwner] = useUpdateOwnerMutation();
 
-const returnErrors = responseRegisterOwner?.isError ? responseRegisterOwner :  responseUpdateOwner;
-
-const [errors, ] = useHookErrorFieldResponse({ response:  returnErrors });
+const [errors, ] = useHookErrorFieldResponse({ response:  responseRegisterOwner });
 
 const checkToken = getToken ? true : false;
 const { data: dataOwners, isLoading: ownerLoading, isError: ownerError } =  useGetOwnerUserListQuery( { checkToken }, { refetchOnMountOrArgChange: true });
 
-const { data: dataOwnerIdDetails, isLoading: ownerIdLoading, isError: ownerIdError }= useGetOwnerIdQuery( editId );
-
-
-const loading: boolean = ownerLoading || ownerIdLoading;
+const loading: boolean = ownerLoading;
 
     useEffect(()=>{
-        if( responseRegisterOwner.isSuccess) {
+        if( responseRegisterOwner?.isSuccess) {
             setOpenModal(false);
+        }
+
+        if( responseRegisterOwner?.isError ) {
+          setOpenError(true);
         }
 
     },[
@@ -59,8 +55,6 @@ const loading: boolean = ownerLoading || ownerIdLoading;
 
   const handleClose = () => {
     setOpenModal(false);
-    setIsEdit(false);
-    setEditId(0);
   };
 
   const onSubmitHandle = (data: IOwnerRegister) => {
@@ -77,27 +71,13 @@ const loading: boolean = ownerLoading || ownerIdLoading;
       registerOwner(dataFilter);
    
   }
-
-  const onSubmitEdit = (data: IOwnerRegister) => {
-
-    var activeBool = (data.active === "true");
-      const dataFilter: IOwnerEditSubmit = {
-          id: editId,
-          fullName: data.fullName,
-          roleId: Number(data.roleId),
-          active: activeBool,
-          password: data.password,
-          confirmPassword: data.confirmPassword
-      }
-      updateOwner(dataFilter);
-  }
-
-  const editHandle = (id: number) => {
-    setEditId(id);
-    setIsEdit(true)
-    setOpenModal(true);
-  }
-
+ 
+  const handleCloseError = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenError(false);
+  };
 
 
 return (
@@ -107,12 +87,13 @@ return (
         loading && <LoadingComponent isLoading={loading} />
      }   
      {
-        (responseRegisterOwner?.isError && !responseRegisterOwner?.isSuccess) && (
+        openError && (
             <>
               <FloatingErrorComponent open={
-                  returnErrors?.isError || !openModal
+                  openError || !openModal
                 } 
                 errors={errors} 
+                handleCloseError={handleCloseError}
               />
             </>
         )
@@ -133,18 +114,18 @@ return (
         </Grid>
       <Grid container spacing={2} columns={{ xs: 6, md: 12 }}>
         <Grid item   xs={12}>
-            { dataOwners?.data && <OwnerUseTableAdvancedComponent editHandle={editHandle} users={dataOwners?.data} columns={createTableGridColumns(dataOwners?.data) as GridColDef[]} /> }
+            { dataOwners?.data && <OwnerUseTableAdvancedComponent users={dataOwners?.data} columns={createTableGridColumns(dataOwners?.data) as GridColDef[]} /> }
           
         </Grid>
       </Grid>
     </Box>
 
        <DialogSimpleComponent 
-            heading= { isEdit ? 'Edit Owner' : 'Add Owner' }
+            heading= { 'Add Owner' }
             handleClose={handleClose} 
-            openModal={openModal || isEdit}
+            openModal={openModal}
         >
-            { isEdit ? <EditUserFormComponent editDetails={dataOwnerIdDetails?.data} onSubmitEdit={onSubmitEdit} />  : <RegisterUserFormComponent  onSubmitHandle={onSubmitHandle} /> }
+           <RegisterUserFormComponent  onSubmitHandle={onSubmitHandle} />
        </DialogSimpleComponent>
    </BodyContainerComponent>
   );

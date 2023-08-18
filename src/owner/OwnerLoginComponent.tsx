@@ -1,4 +1,4 @@
-
+import { useState, useEffect } from 'react'
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { useForm, SubmitHandler } from "react-hook-form"
@@ -36,7 +36,7 @@ type Inputs = {
   }
 
 const OwnerLoginComponent = () => {
-
+    const [openError, setOpenError] = useState(false);
     const {
         register,
         handleSubmit,
@@ -52,6 +52,21 @@ const OwnerLoginComponent = () => {
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         addOwner(data);
     }
+
+    useEffect(()=> {
+        if( responseAddOwner?.isError ) {
+            setOpenError(true);
+          }
+    },[
+        responseAddOwner
+    ]);
+
+    const handleCloseError = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpenError(false);
+      };
 
    
     return (
@@ -79,7 +94,18 @@ const OwnerLoginComponent = () => {
 
             <OwnerFooterComponent />
 
-            <FloatingErrorComponent open={responseAddOwner.isError} errors={errors} />
+            {
+                openError && (
+                <>
+                    <FloatingErrorComponent open={
+                        openError
+                        } 
+                        errors={errors} 
+                        handleCloseError={handleCloseError}
+                    />
+                </>
+                )
+            }
           
         </Box>
     )

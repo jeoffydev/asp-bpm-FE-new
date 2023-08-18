@@ -49,7 +49,7 @@ const EditUserFormComponent = (props: IProps) => {
 
     const { onSubmitEdit, editDetails } = props;
 
-    console.log("editDetails EDIT FORM ", editDetails)
+
 
     const {
         register,
@@ -69,19 +69,14 @@ const EditUserFormComponent = (props: IProps) => {
                         active: editDetails?.active.toString() as string
                 }
                 const arrEdit =   [fixToType]; 
-                console.log("ARR EDIT ", arrEdit)
-                console.count("USEEFFECT ")
                 const fields = ['fullName', 'email', 'roleId', 'password', 'confirmPassword', 'active'];
                 //@ts-ignore
                 fields.forEach(field => setValue(field, arrEdit[0][field]));
-                //setValue(field, arrEdit[0][field]
-                // const editFinal = arrEdit.map((d) => {
-                //     setValue(`${d[0]}`, `${d[1]}`);
-                // })  
-                //setValue();
+               
             }
       },[
-        editDetails
+        editDetails,
+        setValue
       ])
 
 

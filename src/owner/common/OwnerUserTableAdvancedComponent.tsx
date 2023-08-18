@@ -11,6 +11,8 @@ import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteConfirmationComponent from '../../global/DeleteConfirmationComponent';
+import { useNavigate } from 'react-router-dom';
+import { ownerUrl } from '../../utils/Helper';
 
 const GridButtons = styled(Grid)({ 
    marginBottom: '1rem',
@@ -30,13 +32,12 @@ const GridButtons = styled(Grid)({
 type IProps = {
     users: IOwnerTypeView[]
     columns: GridColDef[],
-    editHandle: (id: number)=> void 
 }
 
 
 export default function OwnerUseTableAdvancedComponent (props: IProps)  {
-  
-    const { users, columns, editHandle } = props;
+    const navigate = useNavigate();
+    const { users, columns } = props;
     const rows: GridRowsProp = users;
     const [editButton, setEditButton] = React.useState(false);
     const [editId, setEditId] = React.useState<number | undefined>(undefined);
@@ -61,7 +62,7 @@ export default function OwnerUseTableAdvancedComponent (props: IProps)  {
   const editTools = () => {
     return (
         <>
-            <Button color='primary' variant="contained" onClick={()=>editHandle(editId as number)} startIcon={<EditIcon />}>
+            <Button color='primary' variant="contained" onClick={()=>navigate(`${ownerUrl}/owner/${editId as number}`)} startIcon={<EditIcon />}>
                 Edit
             </Button>
             <Button color='error' variant="contained" onClick={()=>setOpenDialog(true)} startIcon={<DeleteIcon />}>
@@ -106,6 +107,7 @@ export default function OwnerUseTableAdvancedComponent (props: IProps)  {
                     }}
                 isRowSelectable={(params: GridRowParams) => params.row?.email !== 'jeoffy_hipolito@yahoo.com'}
                 onRowSelectionModelChange={(newRowSelectionModel) => {
+                    
                     handleClick(newRowSelectionModel[0] as number)
                 }}
             />

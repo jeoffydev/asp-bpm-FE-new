@@ -8,6 +8,7 @@ import { ProtectedOwnerRouteComponent } from "./owner/ProtectedOwnerRouteCompone
 import OwnerCustomerComponent from "./owner/OwnerCustomerComponent";
 import OwnerUserComponent from "./owner/OwnerUserComponent";
 import { ownerUrl } from "./utils/Helper";
+import OwnerEditComponent from "./owner/OwnerEditComponent";
 
 
 const RouteHolder = () => {
@@ -21,6 +22,7 @@ const RouteHolder = () => {
       <Route path={ownerUrl} element={<ProtectedOwnerRouteComponent/>}>
         <Route path="customers" element={<OwnerCustomerComponent />} />
         <Route path="owners" element={<OwnerUserComponent />} />
+        <Route path="owner/:id" element={<OwnerEditComponent />}  />
       </Route>
       
         <Route path="*" element={"ERROR PAGE"} />
