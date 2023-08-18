@@ -10,6 +10,6 @@ test('renders Owners login without any issue', () => {
             <OwnerLoginComponent />
         </HocWrapper>
     );
-    const ownerElement = screen.getByText(/provider/);
-    expect(ownerElement).toBeInTheDocument();
+    const ownerElement = screen.getByRole('textbox');
+    expect(ownerElement).toBeInTheDocument()
 });
