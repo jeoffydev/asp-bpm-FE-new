@@ -79,12 +79,12 @@ const OwnerLoginComponent = () => {
 
                    
                     <FormWrapper onSubmit={handleSubmit(onSubmit)}>
-                        <input type='email'  {...register("email", { required: true })} />
+                        <input type='email' data-testid="loginEmailOwner" {...register("email", { required: true })} />
                         {errorForm.email && <span>Email field is required</span>}
                         {/* include validation with required or other standard HTML validation rules */}
-                        <input type='password' {...register("password", { required: true })} />
+                        <input type='password' data-testid="loginPwOwner"  {...register("password", { required: true })} />
                         {errorForm.password && <span>Password field is required</span>}
-                        <input type="submit" value={'Enter'} />
+                        <input type="submit" value={'Enter'} data-test-id="loginOwnerBtn" />
                     </FormWrapper>
 
                 </Grid>
