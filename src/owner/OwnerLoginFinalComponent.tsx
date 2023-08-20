@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { useForm, SubmitHandler } from "react-hook-form"
 import { styled } from '@mui/material/styles'; 
-import { useAddOwnerMutation, useCheckOwnerEmailLoginMutation, useFinalizeLoginQuery } from '../services/owner/ownerSliceApi';
+import { useAddOwnerMutation, useFinalizeLoginQuery } from '../services/owner/ownerSliceApi';
 import useAuthenticationUser from '../hooks/useAuthenticationUser';
 import OwnerFooterComponent from './common/OwnerFooterComponent';
 import FloatingErrorComponent from '../global/FloatingErrorComponent';
@@ -56,12 +56,8 @@ const OwnerLoginFinalComponent = () => {
         formState: { errors: errorForm },
       } = useForm<Inputs>();
 
-      console.log("editId ", editId)
+  
       const { data, isLoading, isError  }= useFinalizeLoginQuery( editId, { refetchOnMountOrArgChange: true, skip: skipFetch } );
-
-        console.log("DATA ", data)
-        console.log("ISLOADING  ", isLoading)
-        console.log("isError  ", isError)
 
 
     const [addOwner, responseAddOwner] = useAddOwnerMutation();

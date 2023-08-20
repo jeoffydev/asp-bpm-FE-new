@@ -7,9 +7,8 @@ import {  useCheckOwnerEmailLoginMutation } from '../services/owner/ownerSliceAp
 import OwnerFooterComponent from './common/OwnerFooterComponent';
 import FloatingErrorComponent from '../global/FloatingErrorComponent';
 import useHookErrorFieldResponse from '../hooks/useHookErrorFieldResponse';
-import { useCookies } from 'react-cookie';
-import { cookiesAuth_bpm } from '../auth/authHelper';
 import Typography from '@mui/material/Typography';
+import { useLoginEmailTemplate } from './EmailTemplate/useLoginEmailTemplate';
 
 const FormWrapper = styled('form')({
     display: 'flex',
@@ -38,7 +37,7 @@ type Inputs = {
 
 const OwnerLoginInitComponent = () => {
     const [openError, setOpenError] = useState(false);
-    const [cookies, ] = useCookies([cookiesAuth_bpm]);
+    const [emailTo, setEmailto] = useState('');
 
     const {
         register,
@@ -48,9 +47,19 @@ const OwnerLoginInitComponent = () => {
       const [checkOwnerEmail, responsecheckOwnerEmail] = useCheckOwnerEmailLoginMutation();
 
       const [errors, ] = useHookErrorFieldResponse({ response: responsecheckOwnerEmail});
+
+     // Temp hold off for email account 
+    //   useLoginEmailTemplate({
+    //     secretKey: responsecheckOwnerEmail?.data?.data,
+    //     ifSuccess: responsecheckOwnerEmail?.isSuccess,
+    //     emailTo: emailTo
+    //   })
       
       console.log("REMOVE THIS CONSOLE WHEN IN PROD ", responsecheckOwnerEmail?.isSuccess && responsecheckOwnerEmail?.data?.data)
+    
+    
     const onSubmit: SubmitHandler<Inputs> = (data) => {
+        setEmailto(data.email)
         checkOwnerEmail(data); 
     }
 

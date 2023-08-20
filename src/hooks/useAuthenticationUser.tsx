@@ -60,6 +60,8 @@ const  useAuthenticationUser = (props: IProps) => {
     responseSuccess,
     responseAuth,
     dispatch,
+    navigate,
+    setCookie
   ]);
 
   useEffect(() => {
