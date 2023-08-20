@@ -5,8 +5,9 @@ import { IOwnerAdminAuthState, emptyOwnerAdminState } from '../services/owner/ow
 import { addAuthenticationUser } from '../services/user/userSliceApi';
 import { addAuthenticationUserToken } from '../services/user/userJwtTokenApi';
 import { useNavigate } from "react-router-dom";
-import { cookiesAuth_bpm } from '../auth/authHelper';
+import { cookieUserLimit, cookiesAuth_bpm } from '../auth/authHelper';
 import { useCookies } from 'react-cookie';
+import moment from 'moment';
 
 
 type IProps = {
@@ -37,9 +38,8 @@ const  useAuthenticationUser = (props: IProps) => {
                 _isAuthenticated: true,
                 _tokenKey:responseAuth.tokenKey
             });
-          
-
-            setCookie(cookiesAuth_bpm, record, { path: '/'})
+            
+            setCookie(cookiesAuth_bpm, record, { path: '/', expires: cookieUserLimit.toDate()})
            
             dispatch(
                 addAuthenticationUser(

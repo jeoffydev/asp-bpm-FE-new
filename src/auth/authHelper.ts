@@ -1,3 +1,4 @@
+import moment from "moment";
 import { appSessionStorageVar } from "../utils/Helper";
 
 export const cookiesAuth_bpm= 'bpm_app_auth';
@@ -22,3 +23,5 @@ export const logoutExpiresCookies = () => {
         }
     console.log("document.cookie LOGOUT ", document.cookie)
 }
+
+export const cookieUserLimit = moment().add(1, 'day');
