@@ -2,43 +2,44 @@ import { useEffect} from 'react';
 import { useDispatch } from 'react-redux';
 import { addAuthenticationUserToken } from "../services/user/userJwtTokenApi";
 import { addAuthenticationUser } from "../services/user/userSliceApi";
-import { retrieveAuthToStorage } from '../auth/authHelper';
+import { cookiesAuth_bpm  } from '../auth/authHelper';
+import { useCookies } from 'react-cookie';
 
 const  useGlobalDispatchAuth = () => {
     const dispatch = useDispatch();
-    const auth  = retrieveAuthToStorage();
+    const [cookies, ] = useCookies([cookiesAuth_bpm]);
    
     useEffect(() => {
 
-        if( auth?._isAuthenticated ) {
+        if( cookies?.bpm_app_auth?._isAuthenticated ) {
             dispatch(
               addAuthenticationUserToken(
                   {
-                      token: auth._tokenKey
+                      token: cookies.bpm_app_auth._tokenKey
                   }
               )
             )
             dispatch(
               addAuthenticationUser(
                 {
-                    id: auth._id,
-                    email: auth._email,
-                    fullName: auth._fullName,
-                    roleName: auth._roleName,
-                    roleId: auth._roleId,
-                    isAuthenticated: auth._isAthenticated
+                    id: cookies.bpm_app_auth._id,
+                    email: cookies.bpm_app_auth._email,
+                    fullName: cookies.bpm_app_auth._fullName,
+                    roleName: cookies.bpm_app_auth._roleName,
+                    roleId: cookies.bpm_app_auth._roleId,
+                    isAuthenticated: cookies.bpm_app_auth._isAthenticated
                 }
               )
             )
         }    
     },
     [
-        auth,
+        cookies?.bpm_app_auth,
         dispatch,
     ]);
 
     
-    return [auth?._isAuthenticated as boolean, auth?._roleName as string];
+    return [cookies?.bpm_app_auth?._isAuthenticated as boolean, cookies?.bpm_app_auth?._roleName as string];
 }
 
 export default useGlobalDispatchAuth;

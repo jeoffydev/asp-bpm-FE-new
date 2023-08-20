@@ -3,13 +3,13 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { useForm, SubmitHandler } from "react-hook-form"
 import { styled } from '@mui/material/styles'; 
-import { useAddOwnerMutation } from '../services/owner/ownerSliceApi';
-import useAuthenticationUser from '../hooks/useAuthenticationUser';
+import {  useCheckOwnerEmailLoginMutation } from '../services/owner/ownerSliceApi';
 import OwnerFooterComponent from './common/OwnerFooterComponent';
 import FloatingErrorComponent from '../global/FloatingErrorComponent';
 import useHookErrorFieldResponse from '../hooks/useHookErrorFieldResponse';
 import { useCookies } from 'react-cookie';
 import { cookiesAuth_bpm } from '../auth/authHelper';
+import Typography from '@mui/material/Typography';
 
 const FormWrapper = styled('form')({
     display: 'flex',
@@ -36,34 +36,31 @@ type Inputs = {
     password: string
   }
 
-const OwnerLoginComponent = () => {
+const OwnerLoginInitComponent = () => {
     const [openError, setOpenError] = useState(false);
     const [cookies, ] = useCookies([cookiesAuth_bpm]);
-    console.log("Check owner logged ", cookies?.bpm_app_auth?._isAuthenticated)
 
     const {
         register,
         handleSubmit,
         formState: { errors: errorForm },
       } = useForm<Inputs>();
-      const [addOwner, responseAddOwner] = useAddOwnerMutation();
-      const [errors, ] = useHookErrorFieldResponse({ response: responseAddOwner});
-      useAuthenticationUser({ 
-        responseAuth: responseAddOwner?.data?.data,
-        responseSuccess: responseAddOwner?.isSuccess
-    });
-     
+      const [checkOwnerEmail, responsecheckOwnerEmail] = useCheckOwnerEmailLoginMutation();
+
+      const [errors, ] = useHookErrorFieldResponse({ response: responsecheckOwnerEmail});
+      
+      console.log("REMOVE THIS CONSOLE WHEN IN PROD ", responsecheckOwnerEmail?.isSuccess && responsecheckOwnerEmail?.data?.data)
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        debugger
-        addOwner(data);
+        checkOwnerEmail(data); 
     }
 
     useEffect(()=> {
-        if( responseAddOwner?.isError ) {
+        if( responsecheckOwnerEmail?.isError ) {
             setOpenError(true);
-          }
+        }
+       
     },[
-        responseAddOwner
+        responsecheckOwnerEmail
     ]);
 
     const handleCloseError = (event?: React.SyntheticEvent | Event, reason?: string) => {
@@ -80,17 +77,27 @@ const OwnerLoginComponent = () => {
                 <Grid item xs={4}>
                 </Grid>
                 <Grid item xs={4}>
-                    <h3>Service Provider Login</h3>
-
-                   
-                    <FormWrapper onSubmit={handleSubmit(onSubmit)}>
-                        <input type='email' data-testid="loginEmailOwner" {...register("email", { required: true })} />
-                        {errorForm.email && <span>Email field is required</span>}
-                        {/* include validation with required or other standard HTML validation rules */}
-                        <input type='password' data-testid="loginPwOwner"  {...register("password", { required: true })} />
-                        {errorForm.password && <span>Password field is required</span>}
-                        <input type="submit" value={'Enter'} data-test-id="loginOwnerBtn" />
-                    </FormWrapper>
+                    <h3>Service Provider</h3>
+                    
+                    {
+                        responsecheckOwnerEmail?.isSuccess ? (
+                            <>
+                                <Typography variant="h4" gutterBottom  textAlign={'center'}>
+                                    Email Sent
+                                </Typography>
+                                <Typography variant="h6" gutterBottom  textAlign={'center'}>
+                                    Please check your inbox for the sign in link or sometimes this can land in SPAM!. If it doesn't arrive in a minute or three, please check again.
+                                </Typography> 
+                            </>
+                        ) : (
+                            <FormWrapper onSubmit={handleSubmit(onSubmit)}>
+                                <input type='email' data-testid="loginEmailOwner" {...register("email", { required: true })} />
+                                {errorForm.email && <span>Email field is required</span>}
+                                <input type="submit" value={'Email a login link'} data-test-id="loginOwnerBtn" />
+                            </FormWrapper>
+                        )
+                    }
+                    
 
                 </Grid>
                 <Grid item xs={4}>
@@ -107,6 +114,7 @@ const OwnerLoginComponent = () => {
                         } 
                         errors={errors} 
                         handleCloseError={handleCloseError}
+                        customMessage={'No email found'}
                     />
                 </>
                 )
@@ -116,4 +124,4 @@ const OwnerLoginComponent = () => {
     )
 }
 
-export default OwnerLoginComponent;
+export default OwnerLoginInitComponent;

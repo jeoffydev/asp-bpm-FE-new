@@ -5,23 +5,24 @@ import { IOwnerAdminAuthState, emptyOwnerAdminState } from '../services/owner/ow
 import { addAuthenticationUser } from '../services/user/userSliceApi';
 import { addAuthenticationUserToken } from '../services/user/userJwtTokenApi';
 import { useNavigate } from "react-router-dom";
-import { appSessionStorageVar } from '../utils/Helper';
-import { saveAuthToStorage } from '../auth/authHelper';
+import { cookiesAuth_bpm } from '../auth/authHelper';
+import { useCookies } from 'react-cookie';
+
 
 type IProps = {
     responseAuth: IOwnerAdminAuthState,
     responseSuccess: boolean
 }
+ 
 
 const  useAuthenticationUser = (props: IProps) => {
     const { responseAuth, responseSuccess } = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userData, ] = useState<IOwnerAdminAuthState>(emptyOwnerAdminState);
+  const [, setCookie, ] = useCookies([cookiesAuth_bpm]);
 
   const [tokenKey, ]= useState('')
-
-
 
   useEffect(() => {
 
@@ -36,8 +37,10 @@ const  useAuthenticationUser = (props: IProps) => {
                 _isAuthenticated: true,
                 _tokenKey:responseAuth.tokenKey
             });
-            saveAuthToStorage(record);
-              
+          
+
+            setCookie(cookiesAuth_bpm, record, { path: '/'})
+           
             dispatch(
                 addAuthenticationUser(
                     {

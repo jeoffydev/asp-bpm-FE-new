@@ -1,12 +1,26 @@
-# Getting Started with Create React App
+# Clone Project
+git@github.com:jeoffydev/asp-bpm-FE-new.git
+ 
+## Figma UI plan
+https://www.figma.com/file/HMhvxbOm8Cwj8PVJRwipkx/Demo-wireframe?type=design&node-id=0%3A1&mode=design&t=oWTkniQPCQAA2SWj-1
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Wireframe
+https://www.figma.com/file/DX9MPxEeON6YN4Rq5Zd2ns/BPM-Wireframe?type=design&node-id=0%3A1&mode=design&t=emcWZdPUqTs7UhXb-1
 
-## Available Scripts
+Mockup, project details and Database schema/structure
+https://lucid.app/lucidspark/48c6415a-3533-42dd-bb1c-b7a7a5f40f61/edit?viewport_loc=-13176%2C-5658%2C25960%2C11418%2C0_0&invitationId=inv_16c3e05e-efb0-47a3-8a46-3a2e97304cf5
 
-In the project directory, you can run:
+## Node version
+
+v18.17.1
+
+## Install dependecnies
+ 
+yarn 
 
 ### `yarn start`
+
+yarn start 
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -16,31 +30,26 @@ You will also see any lint errors in the console.
 
 ### `yarn test`
 
+yarn test
+
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ ## Redux tool kit setup and docs
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+ https://redux-toolkit.js.org/rtk-query/overview [click here](https://redux-toolkit.js.org/rtk-query/overview) 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ 
+ ## Run Backend for the API endpoint rosters
+ Asp.Net Core version 7
+ Sql Server
+ Docker
 
-### `yarn eject`
+ ## Run Cypress for the e2e test
+ File located cypress/e2e/login
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+ ``` run this command
+ npx cypress open
+ ```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).

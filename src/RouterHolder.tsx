@@ -9,6 +9,8 @@ import OwnerCustomerComponent from "./owner/OwnerCustomerComponent";
 import OwnerUserComponent from "./owner/OwnerUserComponent";
 import { ownerUrl } from "./utils/Helper";
 import OwnerEditComponent from "./owner/OwnerEditComponent";
+import OwnerLoginInitComponent from "./owner/OwnerLoginInitComponent";
+import OwnerLoginFinalComponent from "./owner/OwnerLoginFinalComponent";
 
 
 const RouteHolder = () => {
@@ -17,7 +19,9 @@ const RouteHolder = () => {
   return (
     <Routes>
         <Route path="/" element={<HomepageComponent />} />
-        <Route path="/owner" element={<OwnerLoginComponent />} />
+        {/* <Route path="/owners" element={<OwnerLoginComponent />} />  */}
+        <Route path="/owner" element={<OwnerLoginInitComponent />} />
+        <Route path="/owner/login/:secret" element={<OwnerLoginFinalComponent />} />
 
       <Route path={ownerUrl} element={<ProtectedOwnerRouteComponent/>}>
         <Route path="customers" element={<OwnerCustomerComponent />} />

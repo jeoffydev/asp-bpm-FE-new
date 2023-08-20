@@ -155,6 +155,22 @@ export const ownerApiSlice =  createApi({
       },
       invalidatesTags: ['allOwners'],
     }),
+    checkOwnerEmailLogin: builder.mutation({
+      query: (payload) => { 
+        return {
+          url: `${apiUrl}/CheckLoginEmail`,
+          method: 'POST',
+          body: payload,
+        }
+      },
+      invalidatesTags: ['allOwners'],
+    }),
+    finalizeLogin: builder.query({
+      query: (secretKey: string) => {
+        return secretKey ? `${apiUrl}/FinalizedLogin/${secretKey}` : `${apiUrlNoresult}`
+      },
+      providesTags: ['allOwners'],
+    }),
      
   }),
 })
@@ -167,6 +183,8 @@ export const {
    useRegisterOwnerMutation,
    useDeleteOwnerMutation,
    useGetOwnerIdQuery,
-   useUpdateOwnerMutation
+   useUpdateOwnerMutation,
+   useCheckOwnerEmailLoginMutation,
+   useFinalizeLoginQuery
 } = ownerApiSlice
 

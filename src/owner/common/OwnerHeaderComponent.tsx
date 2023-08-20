@@ -24,6 +24,8 @@ import { colours, ownerUrl } from '../../utils/Helper';
 import Collapse from '@mui/material/Collapse';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { selectUserAuth } from '../../store/selectors';
+import { useCookies } from 'react-cookie';
+import { cookiesAuth_bpm  } from '../../auth/authHelper';
 
 const BoxWrapperMenu = styled(Box)({ 
     backgroundColor: colours.primaryOrange
@@ -47,6 +49,7 @@ function OwnerHeaderComponent() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const auth = useSelector(selectUserAuth);
+    const [, , removeCookie] = useCookies([cookiesAuth_bpm]);
 
     const [state, setState] = useState({
         left: false,
@@ -66,6 +69,7 @@ function OwnerHeaderComponent() {
           )
         )
         sessionStorage.clear();
+        removeCookie(cookiesAuth_bpm, { path: '/' });
         navigate('/owner');
       }
       type Anchor = 'left';

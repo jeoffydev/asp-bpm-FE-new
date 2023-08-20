@@ -4,16 +4,18 @@ import Snackbar from '@mui/material/Snackbar';
 type IProps = {
     errors: any[],
     open: boolean,
-    handleCloseError?: ()=> void
+    handleCloseError?: ()=> void,
+    customMessage? : string
 }
 
 const FloatingErrorComponent = (props: IProps) => {
-    const { errors, open, handleCloseError } = props;
+    const { errors, open, handleCloseError, customMessage } = props;
     return (
         <Snackbar open={open} autoHideDuration={2000} onClose={handleCloseError}>
                 <Alert severity="error" onClose={handleCloseError} sx={{ width: '100%' }}>
                 {
-                    errors.map((e)=><li key={e}>{e}</li>)
+
+                    customMessage ? customMessage : errors.map((e)=><li key={e}>{e}</li>)
                 }
                 </Alert>
         </Snackbar>
