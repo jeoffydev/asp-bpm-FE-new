@@ -129,5 +129,10 @@ export const organizationApiSlice =  createApi({
   }),
 })
 export const {
+    useGetOrgListQuery,
+    useRegisterOrgsMutation,
+    useDeleteOrgMutation,
+    useGetOrgByIdQuery,
+    useUpdateOrgMutation
 } = organizationApiSlice
 

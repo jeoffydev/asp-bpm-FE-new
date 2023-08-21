@@ -5,8 +5,9 @@ import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 
 const BodyHeightGrid = styled(Grid)({ 
-    height: '100vh',
-    padding: '1rem'
+    height: 'auto',
+    minHeight: '100vh',
+    padding: '1rem',
   });  
 
 type IProps = {

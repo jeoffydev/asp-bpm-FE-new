@@ -10,6 +10,7 @@ import { ownerUrl } from "./utils/Helper";
 import OwnerEditComponent from "./owner/OwnerEditComponent";
 import OwnerLoginInitComponent from "./owner/OwnerLoginInitComponent";
 import OwnerLoginFinalComponent from "./owner/OwnerLoginFinalComponent";
+import OwnerCustomerDetailsComponent from "./owner/OwnerCustomerDetailsComponent";
 
 
 const RouteHolder = () => {
@@ -23,6 +24,7 @@ const RouteHolder = () => {
 
       <Route path={ownerUrl} element={<ProtectedOwnerRouteComponent/>}>
         <Route path="customers" element={<OwnerCustomerComponent />} />
+        <Route path="customers/:id" element={<OwnerCustomerDetailsComponent />} />
         <Route path="owners" element={<OwnerUserComponent />} />
         <Route path="owner/:id" element={<OwnerEditComponent />}  />
       </Route>

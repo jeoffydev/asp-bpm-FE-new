@@ -115,7 +115,7 @@ function OwnerHeaderComponent() {
                     <ListItemIcon>
                         <BusinessIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Customers" />
+                    <ListItemText primary="Organizations" />
                 </ListItemButtonWrapper>
                 <Collapse in={true} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding>
