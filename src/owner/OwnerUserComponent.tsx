@@ -1,10 +1,10 @@
-
+import { useState, useEffect } from 'react'
 import {  IOwnerRegister, IOwnerRegisterSubmit,  useGetOwnerUserListQuery, useRegisterOwnerMutation } from '../services/owner/ownerSliceApi';
 import { useSelector } from 'react-redux';
 import { selectUserToken } from '../store/selectors';
 import LoadingComponent from '../global/LoadingComponent';
 import BodyContainerComponent from '../global/BodyContainerComponent';
-import { useState, useEffect } from 'react'
+
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';

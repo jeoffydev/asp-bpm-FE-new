@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react'
 import BodyContainerComponent from '../global/BodyContainerComponent';
 
 import Card from '@mui/material/Card';
@@ -7,7 +7,7 @@ import {  CardActionArea, CardActions } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
-import { IOrgTypeView, useGetOrgListQuery } from '../services/owner/organizationSliceApi';
+import { IOrgRegister, IOrgRegisterSubmit, IOrgTypeView, useGetOrgListQuery, useRegisterOrgsMutation } from '../services/owner/organizationSliceApi';
 import { selectUserToken } from '../store/selectors';
 import LoadingComponent from '../global/LoadingComponent';
 import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
@@ -23,6 +23,11 @@ import AddIcon from '@mui/icons-material/Add';
 import { styled } from '@mui/material/styles';
 import { colours  } from '../utils/Helper';
 
+import FloatingErrorComponent from '../global/FloatingErrorComponent';
+import DialogSimpleComponent from '../global/DialogSimpleComponent';
+import useHookErrorFieldResponse from '../hooks/useHookErrorFieldResponse';
+import RegisterOrgFormComponent from './globalOwner/RegisterOrgFormComponent';
+
 const ButtonFab = styled(Fab)({ 
     backgroundColor: colours.primaryBlue,
     color: colours.white,
@@ -32,17 +37,74 @@ const OwnerCustomerComponent = () => {
 
     const navigate = useNavigate();
     const getToken = useSelector(selectUserToken);   
+    const [openModal, setOpenModal] = useState(false);
+    const [openError, setOpenError] = useState(false);
+
+    const [registerOrg, responseRegisterOrg] = useRegisterOrgsMutation();
+  
+    const [errors, ] = useHookErrorFieldResponse({ response:  responseRegisterOrg });
 
     const checkToken = getToken ? true : false;
     const { data, isLoading, isError } =  useGetOrgListQuery( { checkToken }, { refetchOnMountOrArgChange: true });
-    console.log("DATA ORGS ", data)
+   
 
+    useEffect(()=>{
+        if( responseRegisterOrg?.isSuccess) {
+            setOpenModal(false);
+        }
+
+        if( responseRegisterOrg?.isError ) {
+          setOpenError(true);
+        }
+
+    },[
+        responseRegisterOrg
+    ])
+
+    const handleClose = () => {
+        setOpenModal(false);
+      };
+      
+      const handleCloseError = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpenError(false);
+      };
+
+      const onSubmitHandle = (data: IOrgRegister) => {
+        var activeBool = (data.active === "true");
+        const dataFilter: IOrgRegisterSubmit = {
+            companyName: data.companyName,
+            businessDetails: data.businessDetails,
+            address: data.address,
+            contactEmail: data.contactEmail,
+            contactPerson: data.contactPerson,
+            mobileNumber: data.mobileNumber,
+            phoneNumber: data.phoneNumber,
+            website: data.website,
+            active: activeBool
+        }
+        registerOrg(dataFilter)
+    }
 
     return (
                <BodyContainerComponent>
                     {
                         isLoading && <LoadingComponent isLoading={isLoading} />
                     } 
+                    {
+                        openError && (
+                            <>
+                            <FloatingErrorComponent open={
+                                openError || !openModal
+                                } 
+                                errors={errors} 
+                                handleCloseError={handleCloseError}
+                            />
+                            </>
+                        )
+                    }
                      <Grid container spacing={2} columns={{ xs: 6, md: 12 }}>
                         <Grid item   xs={6}>
                             <Typography variant="h5" gutterBottom>
@@ -50,7 +112,7 @@ const OwnerCustomerComponent = () => {
                             </Typography>
                         </Grid>
                         <Grid item   xs={6} textAlign={"right"}>
-                            <ButtonFab onClick={()=>{}} color='info'  aria-label="add" variant="extended">
+                            <ButtonFab onClick={()=>setOpenModal(true)} color='info'  aria-label="add" variant="extended">
                                 <AddIcon /> Add Organization
                             </ButtonFab>
                         </Grid>
@@ -97,6 +159,14 @@ const OwnerCustomerComponent = () => {
                             }
                         
                     </Grid>
+
+                    <DialogSimpleComponent 
+                            heading= { 'Add Organization' }
+                            handleClose={handleClose} 
+                            openModal={openModal}
+                        >
+                        <RegisterOrgFormComponent onSubmitHandle={onSubmitHandle} />
+                    </DialogSimpleComponent>
                </BodyContainerComponent>
     )
 }
