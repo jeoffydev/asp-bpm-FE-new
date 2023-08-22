@@ -144,7 +144,7 @@ const OwnerCustomerComponent = () => {
                                                         {org.active ? <CheckCircleIcon color="success" /> : <IndeterminateCheckBoxIcon color="disabled" /> }
                                                     </IconButton>
                                                     
-                                                    <IconButton aria-label="Edit">
+                                                    <IconButton aria-label="Edit" onClick={()=>navigate(`${ownerUrl}/customers/edit/${org.id}`)}>
                                                         <EditIcon color="primary" />
                                                     </IconButton>
                                                     <IconButton aria-label="Delete">

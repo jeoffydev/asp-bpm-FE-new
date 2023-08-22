@@ -11,6 +11,7 @@ import OwnerEditComponent from "./owner/OwnerEditComponent";
 import OwnerLoginInitComponent from "./owner/OwnerLoginInitComponent";
 import OwnerLoginFinalComponent from "./owner/OwnerLoginFinalComponent";
 import OwnerCustomerDetailsComponent from "./owner/OwnerCustomerDetailsComponent";
+import OwnerCustomerEditComponent from "./owner/OwnerCustomerEditComponent";
 
 
 const RouteHolder = () => {
@@ -25,6 +26,7 @@ const RouteHolder = () => {
       <Route path={ownerUrl} element={<ProtectedOwnerRouteComponent/>}>
         <Route path="customers" element={<OwnerCustomerComponent />} />
         <Route path="customers/:id" element={<OwnerCustomerDetailsComponent />} />
+        <Route path="customers/edit/:id" element={<OwnerCustomerEditComponent />} />
         <Route path="owners" element={<OwnerUserComponent />} />
         <Route path="owner/:id" element={<OwnerEditComponent />}  />
       </Route>

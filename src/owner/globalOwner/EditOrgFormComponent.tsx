@@ -1,7 +1,7 @@
-
+import { useEffect} from 'react';
 import { useForm } from "react-hook-form"
 import { styled } from '@mui/material/styles'; 
-import { IOrgRegister } from "../../services/owner/organizationSliceApi";
+import { IOrgRegister, IOrgTypeView } from "../../services/owner/organizationSliceApi";
 import { colours } from "../../utils/Helper";
 
 const FormWrapper = styled('form')({
@@ -42,27 +42,55 @@ const FormWrapper = styled('form')({
 
 
 interface IProps {
-    onSubmitHandle: (data: IOrgRegister) => void,
+    onSubmitEdit: (data: IOrgRegister) => void,
+    editDetails: IOrgTypeView
 } 
-const RegisterOrgFormComponent = (props: IProps) => {
+const EditOrgFormComponent = (props: IProps) => {
 
-    const { onSubmitHandle } = props;
+    const { onSubmitEdit, editDetails } = props;
+
+
 
     const {
         register,
         handleSubmit,
+        setValue,
         formState: { errors: errorForm },
       } = useForm<IOrgRegister>();
 
+          useEffect(() => {
+            if ( editDetails ) {
+                const fixToType: IOrgRegister = {
+                    companyName: editDetails.companyName,
+                    businessDetails: editDetails.businessDetails,
+                    address: editDetails.address,
+                    active: editDetails?.active.toString() as string,
+                    contactEmail: editDetails.contactEmail,
+                    contactPerson: editDetails.contactPerson,
+                    mobileNumber: editDetails.mobileNumber,
+                    phoneNumber: editDetails.phoneNumber,
+                    website: editDetails.website
+                }
+                const arrEdit =   [fixToType]; 
+                const fields = ['companyName', 'businessDetails', 'address', 'active', 'contactEmail', 'contactPerson', 'mobileNumber', 'phoneNumber', 'website'];
+                //@ts-ignore
+                fields.forEach(field => setValue(field, arrEdit[0][field]));
+               
+            }
+      },[
+        editDetails,
+        setValue
+      ])
+
 
     return (
-        <FormWrapper onSubmit={handleSubmit(onSubmitHandle)} style={{width: '100%', minWidth: 340}}>
-            <label>Company Name:</label>
+        <FormWrapper onSubmit={handleSubmit(onSubmitEdit)} style={{width: '100%', minWidth: 340}}>
+             <label>Company Name:</label>
             <input type='text' data-testid="regCompanyName"  {...register("companyName", { required: true })} />
             {errorForm.companyName && <span>Company Name field is required</span>}
             <label>Business Details (optional):</label>
             <input type='text' data-testid="regBusinessDetails"  {...register("businessDetails")} />
-
+            
             <label>Address:</label>
             <input type='text' data-testid="regAddress"  {...register("address", { required: true })} />
             {errorForm.address && <span>Address field is required</span>}
@@ -91,10 +119,10 @@ const RegisterOrgFormComponent = (props: IProps) => {
                 <option value="false">False</option>
             </select>
            
-            <input type="submit" value={'Create New Organization'}  data-testid="regSubmitOrg"   />
+            <input type="submit" value={'Update Organization'}  data-testid="regSubmitOrg"   />
         </FormWrapper>
     )
 }
 
-export default RegisterOrgFormComponent;
+export default EditOrgFormComponent;
 
