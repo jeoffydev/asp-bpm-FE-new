@@ -7,7 +7,7 @@ import {  CardActionArea, CardActions } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
-import { IOrgRegister, IOrgRegisterSubmit, IOrgTypeView, useGetOrgListQuery, useRegisterOrgsMutation } from '../services/owner/organizationSliceApi';
+import { IOrgRegister, IOrgRegisterSubmit, IOrgTypeView, useDeleteOrgMutation, useGetOrgListQuery, useRegisterOrgsMutation } from '../services/owner/organizationSliceApi';
 import { selectUserToken } from '../store/selectors';
 import LoadingComponent from '../global/LoadingComponent';
 import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
@@ -27,6 +27,8 @@ import FloatingErrorComponent from '../global/FloatingErrorComponent';
 import DialogSimpleComponent from '../global/DialogSimpleComponent';
 import useHookErrorFieldResponse from '../hooks/useHookErrorFieldResponse';
 import RegisterOrgFormComponent from './globalOwner/RegisterOrgFormComponent';
+import DeleteConfirmationComponent from '../global/DeleteConfirmationComponent';
+import DeleteConfirmationNameComponent from '../global/DeleteConfirmationNameComponent';
 
 const ButtonFab = styled(Fab)({ 
     backgroundColor: colours.primaryBlue,
@@ -39,8 +41,15 @@ const OwnerCustomerComponent = () => {
     const getToken = useSelector(selectUserToken);   
     const [openModal, setOpenModal] = useState(false);
     const [openError, setOpenError] = useState(false);
+    const [openDeleteBox, setOpenDeleteBox] = useState(false);
+    const [deleteMsg, setDeleteMsg] = useState({
+        id: 0,
+        name: ''
+    });
 
     const [registerOrg, responseRegisterOrg] = useRegisterOrgsMutation();
+
+    const [deleteOrg, ] = useDeleteOrgMutation();
   
     const [errors, ] = useHookErrorFieldResponse({ response:  responseRegisterOrg });
 
@@ -88,6 +97,21 @@ const OwnerCustomerComponent = () => {
         registerOrg(dataFilter)
     }
 
+    const confirmDelete = (id: number, name: string) => {
+        setDeleteMsg({
+            id,
+            name
+        })
+        setOpenDeleteBox(true)
+    }
+
+    const confirmDeleteFinal = (id: number) => {
+        deleteOrg({
+            id
+        });
+        setOpenDeleteBox(false)
+    }
+
     return (
                <BodyContainerComponent>
                     {
@@ -105,6 +129,12 @@ const OwnerCustomerComponent = () => {
                             </>
                         )
                     }
+                    <DeleteConfirmationNameComponent
+                        openDialog={openDeleteBox}
+                        handleClose={()=>setOpenDeleteBox(false)}
+                        handleDelete={confirmDeleteFinal}
+                        message={deleteMsg} 
+                    />
                      <Grid container spacing={2} columns={{ xs: 6, md: 12 }}>
                         <Grid item   xs={6}>
                             <Typography variant="h5" gutterBottom>
@@ -147,7 +177,7 @@ const OwnerCustomerComponent = () => {
                                                     <IconButton aria-label="Edit" onClick={()=>navigate(`${ownerUrl}/customers/edit/${org.id}`)}>
                                                         <EditIcon color="primary" />
                                                     </IconButton>
-                                                    <IconButton aria-label="Delete">
+                                                    <IconButton aria-label="Delete" onClick={()=>confirmDelete(org.id, org.companyName)}>
                                                         <DeleteForeverIcon color="error" />
                                                     </IconButton>
                                                 </CardActions>
