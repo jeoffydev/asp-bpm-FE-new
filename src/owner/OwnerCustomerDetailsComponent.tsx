@@ -21,7 +21,7 @@ import RegisterAdminFormComponent from './globalOwner/RegisterAdminFormComponent
 import { IAdminRegister, IAdminRegisterSubmit, IAdminTypeView, useDeleteAdminMutation, useGetAdminByOrgIdQuery, useRegisterAdminMutation } from '../services/owner/administratorSliceApi';
 import useHookErrorFieldResponse from '../hooks/useHookErrorFieldResponse';
 import FloatingErrorComponent from '../global/FloatingErrorComponent';
-import { useDispatch } from 'react-redux';
+
 
 const BackIcon = styled(KeyboardBackspaceIcon)(()=> ({
     color: colours.primaryBlue,
@@ -35,16 +35,15 @@ const ButtonFab = styled(Fab)({
   });  
 
 function OwnerCustomerDetailsComponent() {
-    const dispatch = useDispatch();
     const navigate = useNavigate(); 
     const [editId, setEditId] = useState(0);
     let { id } = useParams();
     const [openModal, setOpenModal] = useState(false);
     const [openError, setOpenError] = useState(false);
 
-    const { data: orgData, isLoading: orgLoading, isError: orgError }= useGetOrgByIdQuery( editId );
+    const { data: orgData, isLoading: orgLoading,  }= useGetOrgByIdQuery( editId );
 
-    const { data: adminDatas, isLoading: adminLoading, isError: adminError }= useGetAdminByOrgIdQuery( editId );
+    const { data: adminDatas, isLoading: adminLoading,  }= useGetAdminByOrgIdQuery( editId );
 
     const dataCompany: IOrgTypeView = orgData?.data;
     const dataAdmins: IAdminTypeView[] = adminDatas?.data;
@@ -55,9 +54,6 @@ function OwnerCustomerDetailsComponent() {
 
     const [deleteAdmin, ] = useDeleteAdminMutation()
 
-
-    console.log("dataAdmins[] ", dataAdmins)
-    console.log("orgData ", dataCompany)
   
 
     useEffect(()=>{

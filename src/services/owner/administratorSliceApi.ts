@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { RootState } from '../../store/store';
-import { apiAdministratorUrl, apiUrl, apiUrlNoresult } from '../../utils/Helper';
+import { apiAdministratorUrl, apiUrlNoresult } from '../../utils/Helper';
 
 
 
@@ -39,10 +39,12 @@ export interface IAdminRegisterSubmit extends IAdminRegDefault {
   active: boolean,
 }
 
-export interface IadminEditSubmit {
+export interface IAdminEditSubmit {
   fullName: string,
   roleId: number,
   organizationId: number,
+  mobile?: string,
+  phone?: string,
   password: string,
   confirmPassword: string,
   active: boolean,

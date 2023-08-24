@@ -12,7 +12,8 @@ import useHookErrorFieldResponse from '../hooks/useHookErrorFieldResponse';
 import { useParams, useNavigate } from "react-router-dom";
 
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import { IAdminRegister, IAdminRegisterSubmit, useGetAdminIdQuery, useUpdateAdminMutation } from '../services/owner/administratorSliceApi';
+import { IAdminEditSubmit, IAdminRegister,  useGetAdminIdQuery, useUpdateAdminMutation } from '../services/owner/administratorSliceApi';
+import EditAdminFormComponent from './globalOwner/EditAdminFormComponent';
 
 const BackIcon = styled(KeyboardBackspaceIcon)(()=> ({
     color: colours.primaryBlue,
@@ -36,21 +37,22 @@ function OwnerAdminEditComponent() {
     ])
 
 
-    const { data: dataAdminIdDetails, isLoading: adminIdLoading, isError: adminIdError }= useGetAdminIdQuery( editId );
+    const { data: dataAdminIdDetails, isLoading: adminIdLoading, }= useGetAdminIdQuery( editId );
 
     const [updateAdmin, responseUpdateAdmin] = useUpdateAdminMutation();
     const [errors, ] = useHookErrorFieldResponse({ response:  responseUpdateAdmin });
-   
+ 
     useEffect(()=> {
         if(responseUpdateAdmin?.isSuccess) {
-            navigate(`${ownerUrl}/customers/${editId}`)
+            navigate(`${ownerUrl}/customers/${responseUpdateAdmin?.originalArgs?.organizationId}`)
         }
         if( responseUpdateAdmin?.isError ) {
             setOpenError(true);
           }
     },[
         responseUpdateAdmin,
-        navigate
+        navigate,
+        editId
     ]);
 
     
@@ -59,14 +61,14 @@ function OwnerAdminEditComponent() {
     const onSubmitEdit = (data:  IAdminRegister) => {
 
         var activeBool = (data.active === "true");
-        const dataFilter: IAdminRegisterSubmit = {
+        const dataFilter: IAdminEditSubmit = {
+            id: editId,
             fullName: data.fullName,
             mobile: data.mobile,
             phone: data.phone,
             roleId: Number(data.roleId),
             organizationId: Number(data.organizationId),
             active: activeBool,
-            email: data.email,
             password: data.password,
             confirmPassword: data.confirmPassword
         }
@@ -114,7 +116,7 @@ return (
       <Grid container spacing={2} columns={{ xs: 6, md: 12 }}>
         <Grid item   xs={3}></Grid>
         <Grid item   xs={6}>
-            EDIT FORM
+            <EditAdminFormComponent editDetails={dataAdminIdDetails?.data} onSubmitEdit={onSubmitEdit} />
         </Grid>
         <Grid item   xs={3}></Grid>
       </Grid>
