@@ -35,13 +35,14 @@ type IProps = {
     users: IOwnerTypeView[] | IAdminTypeView[],
     columns: GridColDef[],
     visibility?: GridColumnVisibilityModel,
-    confirmDeleteId: (id: number) => void
+    confirmDeleteId: (id: number) => void,
+    editUrl?: string
 }
 
 
 export default function OwnerUseTableAdvancedComponent (props: IProps)  {
     const navigate = useNavigate();
-    const { users, columns, visibility, confirmDeleteId } = props;
+    const { users, columns, visibility, confirmDeleteId, editUrl } = props;
     const rows: GridRowsProp = users;
     const [editButton, setEditButton] = React.useState(false);
     const [editId, setEditId] = React.useState<number | undefined>(undefined);
@@ -64,9 +65,10 @@ export default function OwnerUseTableAdvancedComponent (props: IProps)  {
   }
 
   const editTools = () => {
+    const url = editUrl ? editUrl : 'owner';
     return (
         <>
-            <Button color='primary' variant="contained" onClick={()=>navigate(`${ownerUrl}/owner/${editId as number}`)} startIcon={<EditIcon />}>
+            <Button color='primary' variant="contained" onClick={()=>navigate(`${ownerUrl}/${url}/${editId as number}`)} startIcon={<EditIcon />}>
                 Edit
             </Button>
             <Button color='error' variant="contained" onClick={()=>setOpenDialog(true)} startIcon={<DeleteIcon />}>

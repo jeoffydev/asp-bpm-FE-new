@@ -12,6 +12,7 @@ import OwnerLoginInitComponent from "./owner/OwnerLoginInitComponent";
 import OwnerLoginFinalComponent from "./owner/OwnerLoginFinalComponent";
 import OwnerCustomerDetailsComponent from "./owner/OwnerCustomerDetailsComponent";
 import OwnerCustomerEditComponent from "./owner/OwnerCustomerEditComponent";
+import OwnerAdminEditComponent from "./owner/OwnerAdminEditComponent";
 
 
 const RouteHolder = () => {
@@ -27,6 +28,7 @@ const RouteHolder = () => {
         <Route path="customers" element={<OwnerCustomerComponent />} />
         <Route path="customers/:id" element={<OwnerCustomerDetailsComponent />} />
         <Route path="customers/edit/:id" element={<OwnerCustomerEditComponent />} />
+        <Route path="customers/administrator/edit/:id" element={<OwnerAdminEditComponent />} />
         <Route path="owners" element={<OwnerUserComponent />} />
         <Route path="owner/:id" element={<OwnerEditComponent />}  />
       </Route>

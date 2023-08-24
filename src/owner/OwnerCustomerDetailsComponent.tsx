@@ -147,9 +147,19 @@ function OwnerCustomerDetailsComponent() {
                 </Grid>
             </Grid>
             <Grid container spacing={2} columns={{ xs: 6, md: 12 }}>
-                <Grid item   xs={12}>
+                <Grid item xs={2}>
+                    {dataCompany?.active &&  <Typography variant="body2" color="text.secondary"> Active: <br /> {dataCompany.businessDetails} </Typography>}
+                    {dataCompany?.businessDetails &&  <Typography variant="body2" color="text.secondary">Details: <br />  {dataCompany.businessDetails} </Typography>}
+                    {dataCompany?.contactPerson &&  <Typography variant="body2" color="text.secondary"> Contact:<br /> {dataCompany.contactPerson} </Typography>}
+                    {dataCompany?.contactEmail &&  <Typography variant="body2" color="text.secondary"> Email:<br /> {dataCompany.contactEmail} </Typography>}
+                    {dataCompany?.mobileNumber &&  <Typography variant="body2" color="text.secondary"> Mobile:<br /> {dataCompany.mobileNumber} </Typography>}
+                    {dataCompany?.phoneNumber &&  <Typography variant="body2" color="text.secondary"> Phone:<br /> {dataCompany.phoneNumber} </Typography>}
+                    {dataCompany?.website &&  <Typography variant="body2" color="text.secondary"> Web:<br /> {dataCompany.website} </Typography>}
+                </Grid>
+                <Grid item   xs={10}>
                     { dataAdmins && dataAdmins.length > 0 && 
                         <OwnerUseTableAdvancedComponent 
+                            editUrl={'customers/administrator/edit'}
                             confirmDeleteId={confirmDelete}
                             users={dataAdmins} 
                             columns={createTableGridColumns(dataAdmins) as GridColDef[]} 
