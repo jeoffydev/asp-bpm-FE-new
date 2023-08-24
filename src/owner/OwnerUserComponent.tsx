@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import {  IOwnerRegister, IOwnerRegisterSubmit,  useGetOwnerUserListQuery, useRegisterOwnerMutation } from '../services/owner/ownerSliceApi';
+import {  IOwnerRegister, IOwnerRegisterSubmit,  useDeleteOwnerMutation,  useGetOwnerUserListQuery, useRegisterOwnerMutation } from '../services/owner/ownerSliceApi';
 import { useSelector } from 'react-redux';
 import { selectUserToken } from '../store/selectors';
 import LoadingComponent from '../global/LoadingComponent';
@@ -40,6 +40,8 @@ const { data: dataOwners, isLoading: ownerLoading, isError: ownerError } =  useG
 
 const loading: boolean = ownerLoading;
 
+const [deleteOwner,] = useDeleteOwnerMutation();
+
     useEffect(()=>{
         if( responseRegisterOwner?.isSuccess) {
             setOpenModal(false);
@@ -79,6 +81,12 @@ const loading: boolean = ownerLoading;
     setOpenError(false);
   };
 
+  const confirmDelete = (id: number) => {
+    deleteOwner({
+        id
+    });
+  }
+
 
 return (
    <BodyContainerComponent>
@@ -114,7 +122,7 @@ return (
         </Grid>
       <Grid container spacing={2} columns={{ xs: 6, md: 12 }}>
         <Grid item   xs={12}>
-            { dataOwners?.data && <OwnerUseTableAdvancedComponent users={dataOwners?.data} columns={createTableGridColumns(dataOwners?.data) as GridColDef[]} /> }
+            { dataOwners?.data && <OwnerUseTableAdvancedComponent confirmDeleteId={confirmDelete} users={dataOwners?.data} columns={createTableGridColumns(dataOwners?.data) as GridColDef[]} /> }
           
         </Grid>
       </Grid>

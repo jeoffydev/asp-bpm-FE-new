@@ -3,7 +3,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { IOwnerTypeView, useDeleteOwnerMutation } from '../../services/owner/ownerSliceApi';
-import { DataGrid, GridRowsProp, GridColDef, GridToolbar, GridRowParams } from '@mui/x-data-grid';
+import { DataGrid, GridRowsProp, GridColDef, GridToolbar, GridRowParams, GridColumnVisibilityModel } from '@mui/x-data-grid';
 
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -13,6 +13,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteConfirmationComponent from '../../global/DeleteConfirmationComponent';
 import { useNavigate } from 'react-router-dom';
 import { ownerUrl } from '../../utils/Helper';
+import { initialState } from './../../services/user/userJwtTokenApi';
+import { IAdminTypeView } from '../../services/owner/administratorSliceApi';
 
 const GridButtons = styled(Grid)({ 
    marginBottom: '1rem',
@@ -30,20 +32,22 @@ const GridButtons = styled(Grid)({
   });
 
 type IProps = {
-    users: IOwnerTypeView[]
+    users: IOwnerTypeView[] | IAdminTypeView[],
     columns: GridColDef[],
+    visibility?: GridColumnVisibilityModel,
+    confirmDeleteId: (id: number) => void
 }
 
 
 export default function OwnerUseTableAdvancedComponent (props: IProps)  {
     const navigate = useNavigate();
-    const { users, columns } = props;
+    const { users, columns, visibility, confirmDeleteId } = props;
     const rows: GridRowsProp = users;
     const [editButton, setEditButton] = React.useState(false);
     const [editId, setEditId] = React.useState<number | undefined>(undefined);
     const [openDialog, setOpenDialog] = React.useState(false);
 
-    const [deleteOwner,] = useDeleteOwnerMutation();
+ 
   
   
  
@@ -53,9 +57,9 @@ export default function OwnerUseTableAdvancedComponent (props: IProps)  {
   }
 
   const confirmDelete = () => {
-    deleteOwner({
-        id: editId
-    });
+    if(editId ) {
+        confirmDeleteId(editId);
+    }
     setOpenDialog(false);
   }
 
@@ -98,18 +102,22 @@ export default function OwnerUseTableAdvancedComponent (props: IProps)  {
                     },
                 }}
                 pagination
-                    initialState={{
+                initialState={{
                         pagination: {
                             paginationModel: {
                             pageSize: 20,
                             },
                         },
-                    }}
+                        columns: {
+                            columnVisibilityModel: visibility ? visibility : {}
+                          },
+                }}
                 isRowSelectable={(params: GridRowParams) => params.row?.email !== 'jeoffy_hipolito@yahoo.com'}
                 onRowSelectionModelChange={(newRowSelectionModel) => {
                     
                     handleClick(newRowSelectionModel[0] as number)
                 }}
+               
             />
         </Box>
     </DivBox>

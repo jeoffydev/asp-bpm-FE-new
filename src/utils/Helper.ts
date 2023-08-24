@@ -3,6 +3,7 @@ import { GridColDef } from "@mui/x-data-grid";
 export const appSessionStorageVar = "_authBpm_v"
 export const apiUrl = '/api/OwnerApi';
 export const apiOrganizationUrl = '/api/OrganizationApi';
+export const apiAdministratorUrl ='/api/AdministratorApi';
 export const apiUrlNoresult = '/api/NullApi';
 export const ownerRole = 'Owner';
 export const adminRole = 'Admin';

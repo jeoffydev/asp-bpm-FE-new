@@ -3,6 +3,7 @@ import { ownerApiSlice } from '../services/owner/ownerSliceApi';
 import { userSliceApi } from '../services/user/userSliceApi';
 import { userJwtTokenApiSlice } from '../services/user/userJwtTokenApi';
 import { organizationApiSlice } from '../services/owner/organizationSliceApi';
+import { administratorApiSlice } from '../services/owner/administratorSliceApi';
 
 export const store = configureStore({
   reducer: {
@@ -10,10 +11,12 @@ export const store = configureStore({
     userJwtToken: userJwtTokenApiSlice.reducer,
     [ownerApiSlice.reducerPath]: ownerApiSlice.reducer,
     [organizationApiSlice.reducerPath]: organizationApiSlice.reducer,
+    [administratorApiSlice.reducerPath]: administratorApiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
     ownerApiSlice.middleware,
-    organizationApiSlice.middleware
+    organizationApiSlice.middleware,
+    administratorApiSlice.middleware,
     ),
 }) 
  

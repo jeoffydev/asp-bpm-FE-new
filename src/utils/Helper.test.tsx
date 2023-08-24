@@ -38,7 +38,7 @@ const columnsMockTest: GridColDef[] = [
 beforeEach(async () => {
     await act( async () => render(
         <HocWrapper>
-            <OwnerUserTableAdvancedComponent users={usersMockData} columns={columnsMockTest} />
+            <OwnerUserTableAdvancedComponent confirmDeleteId={()=>{}} users={usersMockData} columns={columnsMockTest} />
         </HocWrapper>
     ));
 });
