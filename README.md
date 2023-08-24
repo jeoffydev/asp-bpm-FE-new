@@ -2,13 +2,14 @@
 git@github.com:jeoffydev/asp-bpm-FE-new.git
  
 ## Figma UI plan
-https://www.figma.com/file/HMhvxbOm8Cwj8PVJRwipkx/Demo-wireframe?type=design&node-id=0%3A1&mode=design&t=oWTkniQPCQAA2SWj-1
+https://www.figma.com/file/HMhvxbOm8Cwj8PVJRwipkx/Demo-wireframe?type=design&node-id=1%3A89&mode=design&t=ITPZAisL5sbCZE1D-1
 
 Wireframe
-https://www.figma.com/file/DX9MPxEeON6YN4Rq5Zd2ns/BPM-Wireframe?type=design&node-id=0%3A1&mode=design&t=emcWZdPUqTs7UhXb-1
+https://www.figma.com/file/DX9MPxEeON6YN4Rq5Zd2ns/BPM-Wireframe?type=design&node-id=0%3A1&mode=design&t=dCXpmrkOzlMiMkze-1
 
 Mockup, project details and Database schema/structure
-https://lucid.app/lucidspark/48c6415a-3533-42dd-bb1c-b7a7a5f40f61/edit?viewport_loc=-13176%2C-5658%2C25960%2C11418%2C0_0&invitationId=inv_16c3e05e-efb0-47a3-8a46-3a2e97304cf5
+
+https://lucid.app/lucidspark/48c6415a-3533-42dd-bb1c-b7a7a5f40f61/edit?viewport_loc=-3132%2C-763%2C6690%2C2942%2C0_0&invitationId=inv_16c3e05e-efb0-47a3-8a46-3a2e97304cf5
 
 ## Node version
 
