@@ -29,10 +29,13 @@ test('renders owner registration form without any issues', async () => {
 });
 
 test('renders owner registration form with validation', async () => {
-    const regButton = screen.getByRole('button', {
-        name: /submit/i
+    act(() => {
+        const regButton = screen.getByRole('button', {
+            name: /submit/i
+          });
+          fireEvent.click(regButton); 
       });
-      fireEvent.click(regButton); 
+    
       await waitFor(() => {
         screen.getByText(/name field is required/i)
         screen.getByText(/email field is required/i)

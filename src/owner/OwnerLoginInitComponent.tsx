@@ -100,9 +100,9 @@ const OwnerLoginInitComponent = () => {
                             </>
                         ) : (
                             <FormWrapper onSubmit={handleSubmit(onSubmit)}>
-                                <input type='email' data-testid="loginEmailOwner" {...register("email", { required: true })} />
+                                <input type='email' data-testid="loginEmailInitOwner" {...register("email", { required: true })} />
                                 {errorForm.email && <span>Email field is required</span>}
-                                <input type="submit" value={'Email a login link'} data-test-id="loginOwnerBtn" />
+                                <input type="submit" value={'Email a login link'} data-test-id="loginOwnerInitBtn" />
                             </FormWrapper>
                         )
                     }

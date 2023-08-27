@@ -54,7 +54,6 @@ const OwnerLoginComponent = () => {
     });
      
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        debugger
         addOwner(data);
     }
 
