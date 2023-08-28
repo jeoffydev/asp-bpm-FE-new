@@ -13,6 +13,7 @@ import OwnerLoginFinalComponent from "./owner/OwnerLoginFinalComponent";
 import OwnerCustomerDetailsComponent from "./owner/OwnerCustomerDetailsComponent";
 import OwnerCustomerEditComponent from "./owner/OwnerCustomerEditComponent";
 import OwnerAdminEditComponent from "./owner/OwnerAdminEditComponent";
+import OwnerCypressFinalLogin from "./owner/OwnerCypressFinalLogin";
 
 
 const RouteHolder = () => {
@@ -23,6 +24,7 @@ const RouteHolder = () => {
         <Route path="/" element={<HomepageComponent />} />
         <Route path="/owner" element={<OwnerLoginInitComponent />} />
         <Route path="/owner/login/:secret" element={<OwnerLoginFinalComponent />} />
+        <Route path="/owner/cypress/:secret" element={<OwnerCypressFinalLogin />} />
 
       <Route path={ownerUrl} element={<ProtectedOwnerRouteComponent/>}>
         <Route path="customers" element={<OwnerCustomerComponent />} />
