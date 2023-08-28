@@ -45,7 +45,7 @@ test('renders owner registration form with validation', async () => {
    
 });
 
-test('Owner registration form with values and submit', async () => {
+test('Owner registration form with values', async () => {
 
     const regNameOwner = screen.getAllByTestId('regNameOwner');
     fireEvent.change(regNameOwner[0], { target: { value: 'Test owner' } });
@@ -57,10 +57,20 @@ test('Owner registration form with values and submit', async () => {
     fireEvent.change(regPw1Owner[0], { target: { value: '123456' } });
     const regPw2Owner = screen.getAllByTestId('regPw2Owner');
     fireEvent.change(regPw2Owner[0], { target: { value: '123456' } });
-    const regButton = screen.getByRole('button', {
-        name: /submit/i
+  
+    
+
+    act(() => {
+        const regButton = screen.getByRole('button', {
+            name: /submit/i
+          });
+          fireEvent.click(regButton); 
       });
-      fireEvent.click(regButton);
-     
+
+      await waitFor(() => {
+        expect(screen.queryByText(/name field is required/i)).not.toBeInTheDocument()
+      });
+    
+   
    
 });

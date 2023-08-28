@@ -86,13 +86,13 @@ const [deleteOwner,] = useDeleteOwnerMutation();
         id
     });
   }
-
+//console.log("dataOwners ", dataOwners)
 
 return (
    <BodyContainerComponent>
 
     {
-        loading && <LoadingComponent isLoading={loading} />
+        loading && <LoadingComponent data-testid="loadingDataTest" isLoading={loading} />
      }   
      {
         openError && (

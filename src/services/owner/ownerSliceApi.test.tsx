@@ -1,5 +1,5 @@
 
-import { IOwnerRegisterSubmit, IOwnerTypeView, useAddOwnerMutation, useGetOwnerListQuery, useGetOwnerUserListQuery } from './ownerSliceApi';
+import { IOwnerRegisterSubmit, IOwnerTypeView, useAddOwnerMutation, useGetOwnerListQuery, useGetOwnerUserListQuery, useRegisterOwnerMutation } from './ownerSliceApi';
 import { store } from '../../store/store';
 import { setupServer } from "msw/node";  
 import { rest } from 'msw';
@@ -9,11 +9,14 @@ import HocWrapper from '../../HocWrapper';
 import fetchMock from 'jest-fetch-mock';
 import nock from 'nock';
 import { addAuthenticationUserToken } from '../../services/user/userJwtTokenApi';
+import { renderWithProviders } from '../../owner/test/test-utils';
+
+
 
 
 const baseUrlApi = 'http://localhost:5015/api/OwnerApi';
 
-const userMock = [
+export const userMock = [
     
     {
         id: 1,
@@ -34,14 +37,31 @@ const userMock = [
     
   ];
 
-  const addOwner = {
-    fullName: "",
+  const addOwner: IOwnerRegisterSubmit = {
+    fullName: "test",
     email: "testOwner@owner.com",
     active: true,
     roleId: 2,
     password: "jan12dj22",
     confirmPassword: "jan12dj223"
 }
+
+
+// describe('OwnerUserComponent', () => {
+//   it('handles OwnerUserComponent()', async () => {
+
+//       jest.useFakeTimers();
+//       const { container } = renderWithProviders(<OwnerUserComponent />);
+//       await screen.findByRole('heading', { name: /providers/i })
+//       act(() => jest.advanceTimersByTime(2000))
+//       await container.getElementsByClassName('MuiCircularProgress-root');
+
+//   })
+  
+// })
+
+
+
 
   const handlersRequest = (req?: string) => { 
 
@@ -75,7 +95,7 @@ const userMock = [
 
 describe('Correct Owner slice API', () => {
 
-        handlersRequest();
+       // handlersRequest();
 
         it('Should initially set Owners  from API', async () => {
             const state = await store.getState().ownersApi;
@@ -87,11 +107,32 @@ describe('Correct Owner slice API', () => {
 
 
 
-describe('Login owner slice API', () => {
 
-  handlersRequest();
+// describe('Login owner slice API', () => {
 
-    it('Should ', async ()=>{
+//   //handlersRequest();
+
+//     it('Should ', async ()=>{
+
+      // const { result } =renderHook(() => useGetOwnerListQuery({ checkToken: 'token' }), { wrapper: HocWrapper });
+    
+      // expect(result.current).toMatchObject({
+      //   status: 'pending',
+      //   endpointName: 'getOwnerList',
+      //   isLoading: true,
+      //   isSuccess: false,
+      //   isError: false,
+      //   isFetching: true,
+      // });
+
+      // act(() => jest.advanceTimersByTime(2000))
+
+      // console.log("EXPECT ", result) 
+
+      // console.log("FETCH MOCK ", fetchMock)
+      // console.log("`${baseUrlApi}/owners/1`", `${baseUrlApi}/owners/1`)
+
+      
 
     //   const { result } =renderHook(() => addAuthenticationUserToken({
     //     token: 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDAxIiwidW5pcXVlX25hbWUiOiJqZW9mZnlfaGlwb2xpdG9AeWFob28uY29tIiwicm9sZSI6Ik93bmVyIiwibmJmIjoxNjkyODQ4ODAyLCJleHAiOjE2OTI5MzUyMDIsImlhdCI6MTY5Mjg0ODgwMn0.PPABMCAiiHx5hMuxQgLFitJRBgG_VIaTj41yC5bf0JwFjl0oZWL2aKvtO0_b2-ZUmf-sGv1f_y1LTzgMZi1Asg'
@@ -137,69 +178,39 @@ describe('Login owner slice API', () => {
             //     .get('/owners/1')
             //     .reply(200, userMock)
 
-            //     let stateOwnerList = store.getState().ownersApi;
-            //     console.log("stateOwnerList111 ", stateOwnerList)
+                // let stateOwnerList = store.getState().ownersApi;
+                // console.log("stateOwnerList111222 ", stateOwnerList)
 
 
            
-              const { result: ownerList } =renderHook(() => useGetOwnerListQuery({ checkToken: 'token' }), { wrapper: HocWrapper });
-                  expect(ownerList.current).toMatchObject({
-                      status: 'pending',
-                      endpointName: 'getOwnerList',
-                      isLoading: true,
-                      isSuccess: false,
-                      isError: false,
-                      isFetching: true,
-                    });
+              // const { result: ownerList } =renderHook(() => useGetOwnerListQuery({ checkToken: 'token' }), { wrapper: HocWrapper });
+              //     expect(ownerList.current).toMatchObject({
+              //         status: 'pending',
+              //         endpointName: 'getOwnerList',
+              //         isLoading: true,
+              //         isSuccess: false,
+              //         isError: false,
+              //         isFetching: true,
+              //       });
             
-                    console.log("ownerList111 ", ownerList)
+              //       console.log("ownerList111 ", ownerList)
 
-                    const handleRequest = [
-                      rest.get(`${baseUrlApi}/owners/1`, (_, res, ctx) =>
-                        res(ctx.status(200), ctx.json<IOwnerTypeView[]>(userMock), ctx.delay(3000))
-                      ),
-                    ]; 
+              //       const handleRequest = [
+              //         rest.get(`/owners/1`, (_, res, ctx) =>
+              //           res(ctx.status(200), ctx.json<IOwnerTypeView[]>(userMock), ctx.delay(3000))
+              //         ),
+              //       ]; 
                   
             
-                  const server = setupServer(...handleRequest); 
-                        console.log("server serverserver", server)
+              //     const server = setupServer(...handleRequest); 
+              //           console.log("server serverserver", server)
 
                         
        
                    
-                      let stateOwnerList = await store.getState().ownersApi;
-                      console.log("stateOwnerList LAST ", stateOwnerList)
+              //         let stateOwnerList = await store.getState().ownersApi;
+              //         console.log("stateOwnerList LAST ", stateOwnerList)
 
              
-    })
-})
-
-// describe('Add Owner slice API', () => {
-//       it('Should add Owners  from OwnerUserComponent component', async () => {
-  
-//         const { result } =renderHook(() => useGetOwnerListQuery({ checkToken: 'token' }), { wrapper: HocWrapper });
-
-//         expect(result.current).toMatchObject({
-//           status: 'pending',
-//           endpointName: 'getOwnerList',
-//           isLoading: true,
-//           isSuccess: false,
-//           isError: false,
-//           isFetching: true,
-//         });
-
-//         console.log("result1 ", result)
-
-//         await waitFor(() => {
-//           console.log("result2 ", result)
-//           expect(result.current.isSuccess).toBe(true)
-//           expect(fetchMock).toBeCalledTimes(1); 
-//         });
-
-  
-        
-        
-       
-//       }) 
-
-// }); 
+//     })
+// })

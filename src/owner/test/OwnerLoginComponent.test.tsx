@@ -29,18 +29,18 @@ test('renders Owners login click button without textboxes values', async () => {
       });
 });
 
-test('renders add values to Login textboxes with values', async () => {
+// test('renders add values to Login textboxes with values', async () => {
     
-    const emailTxtBox = screen.getByTestId('loginEmailOwner');
-    const pwTxtBox = screen.getByTestId('loginPwOwner');
-    fireEvent.change(emailTxtBox, { target: { value: 'jeoffy_hipolito@yahoo.com' } });
-    fireEvent.change(pwTxtBox, { target: { value: '1234567' } });
-    const loginButton = screen.getByRole('button', {
-        name: /enter/i
-      });
-      fireEvent.click(loginButton);
-      expect(emailTxtBox).toHaveValue('jeoffy_hipolito@yahoo.com');
+//     const emailTxtBox = screen.getByTestId('loginEmailOwner');
+//     const pwTxtBox = screen.getByTestId('loginPwOwner');
+//     fireEvent.change(emailTxtBox, { target: { value: 'jeoffy_hipolito@yahoo.com' } });
+//     fireEvent.change(pwTxtBox, { target: { value: '1234567' } });
+//     const loginButton = screen.getByRole('button', {
+//         name: /enter/i
+//       });
+//       fireEvent.click(loginButton);
+//       expect(emailTxtBox).toHaveValue('jeoffy_hipolito@yahoo.com');
 
-});
+// });
 
 

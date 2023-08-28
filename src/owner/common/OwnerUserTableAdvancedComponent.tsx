@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { IOwnerTypeView, useDeleteOwnerMutation } from '../../services/owner/ownerSliceApi';
+import { IOwnerTypeView  } from '../../services/owner/ownerSliceApi';
 import { DataGrid, GridRowsProp, GridColDef, GridToolbar, GridRowParams, GridColumnVisibilityModel } from '@mui/x-data-grid';
 
 import Button from '@mui/material/Button';
@@ -13,7 +13,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteConfirmationComponent from '../../global/DeleteConfirmationComponent';
 import { useNavigate } from 'react-router-dom';
 import { ownerUrl } from '../../utils/Helper';
-import { initialState } from './../../services/user/userJwtTokenApi';
 import { IAdminTypeView } from '../../services/owner/administratorSliceApi';
 
 const GridButtons = styled(Grid)({ 
@@ -107,13 +106,14 @@ export default function OwnerUseTableAdvancedComponent (props: IProps)  {
                 initialState={{
                         pagination: {
                             paginationModel: {
-                            pageSize: 20,
+                            pageSize: 25,
                             },
                         },
                         columns: {
                             columnVisibilityModel: visibility ? visibility : {}
                           },
                 }}
+                pageSizeOptions={[5, 10, 25]}
                 isRowSelectable={(params: GridRowParams) => params.row?.email !== 'jeoffy_hipolito@yahoo.com'}
                 onRowSelectionModelChange={(newRowSelectionModel) => {
                     

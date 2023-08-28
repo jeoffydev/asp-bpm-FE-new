@@ -3,6 +3,9 @@ import { store } from '../../store/store';
 import { setupServer } from "msw/node";  
 import { rest } from 'msw';
 import { IOrgTypeView } from './organizationSliceApi';
+import { renderWithProviders } from '../../owner/test/test-utils';
+import OwnerCustomerComponent from '../../owner/OwnerCustomerComponent';
+import { act, fireEvent, render, renderHook, screen, waitFor, within } from '@testing-library/react';
 
 const baseUrlApi = 'http://localhost:5015/api/OrganizationApi';
 
@@ -61,3 +64,4 @@ describe('Correct Org slice API', () => {
         }) 
 
 }); 
+ 

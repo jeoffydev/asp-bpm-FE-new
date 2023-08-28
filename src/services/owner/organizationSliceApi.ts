@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { RootState } from '../../store/store';
-import { apiOrganizationUrl, apiUrl, apiUrlNoresult } from '../../utils/Helper';
+import { apiOrganizationUrl,  apiUrlNoresult } from '../../utils/Helper';
 
 
 
