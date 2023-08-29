@@ -1,4 +1,4 @@
-import OwnerLoginPage from "./cy_constants"
+import { OwnerLoginPage } from "./cy_constants"
 
 
 beforeEach(() =>
@@ -16,10 +16,16 @@ describe('Owner spec', () => {
 
   //@ts-ignore
   Cypress.Commands.add('loginOwner', (email: string, pw: string) => {
-    cy.visit(`http://localhost:3000/owner/cypress/${Cypress.env('LOGINLINK')}`)
+    cy.visit(`${OwnerLoginPage.localhostLinkCypress}/${Cypress.env('LOGINLINK')}`)
     cy.get(OwnerLoginPage.emailField).type(email);
     cy.get(OwnerLoginPage.pwField).type(pw);
   })
+
+  Cypress.Commands.add('loggedInOwner', () => {
+    cy.loginOwner(Cypress.env('EMAILOWNER'), Cypress.env('PWOWNER'))
+    cy.get(OwnerLoginPage.loginBtn).click({ force: true})
+  })
+
 
   it('passes with button and input', () => {
     cy.get(OwnerLoginPage.loginInBtn).should('exist');
@@ -54,6 +60,5 @@ describe('Owner spec', () => {
     cy.get(OwnerLoginPage.loginBtn).click({ force: true})
     cy.get(`[aria-label="menu"]`).click();
     cy.contains('Providers').should('exist');
-
   })
 })

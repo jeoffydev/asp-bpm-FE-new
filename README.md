@@ -50,7 +50,7 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
  ## Run Cypress for the e2e test
  File located cypress/e2e/login
 
- Owner login activity Cypress test  [click here](https://share.vidyard.com/watch/RLUineniTdTVNnhnvfchGo?)
+ Owner login activity Cypress test  [click here](https://share.vidyard.com/watch/8frRcYcPi3M5G4uLJ6eoZF?)
 
  ``` run this command
  npx cypress open
