@@ -34,6 +34,7 @@ describe('Owner spec', () => {
 
   it('click button without email value', () => {
     cy.get(OwnerLoginPage.loginInBtn).click({ force: true})
+    cy.wait(2500)
     cy.contains('Email field is required').should('exist');
   })
   
@@ -44,6 +45,7 @@ describe('Owner spec', () => {
   it('Submit login link to email', () => {
     cy.get(OwnerLoginPage.loginInBtn).type(Cypress.env('EMAILOWNER'));
     cy.get(OwnerLoginPage.loginInBtn).click({ force: true})
+    cy.wait(2500)
     cy.contains('Email Sent').should('exist');
   })
 
@@ -51,14 +53,18 @@ describe('Owner spec', () => {
     //@ts-ignore
     cy.loginOwner(Cypress.env('EMAILOWNER'), Cypress.env('PWOWNER'))
     cy.get(OwnerLoginPage.loginBtn).click({ force: true})
+    cy.wait(2500)
     cy.contains('Welcome').should('exist');
   })
 
   it('Loggedin User inside Owner dashboard', () => {
     //@ts-ignore
     cy.loginOwner(Cypress.env('EMAILOWNER'), Cypress.env('PWOWNER'))
+    cy.wait(500)
     cy.get(OwnerLoginPage.loginBtn).click({ force: true})
+    cy.wait(500)
     cy.get(`[aria-label="menu"]`).click();
+    cy.wait(500)
     cy.contains('Providers').should('exist');
   })
 })
