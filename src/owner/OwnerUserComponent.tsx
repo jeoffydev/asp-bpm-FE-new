@@ -36,7 +36,7 @@ const [registerOwner, responseRegisterOwner] = useRegisterOwnerMutation();
 const [errors, ] = useHookErrorFieldResponse({ response:  responseRegisterOwner });
 
 const checkToken = getToken ? true : false;
-const { data: dataOwners, isLoading: ownerLoading, isError: ownerError } =  useGetOwnerUserListQuery( { checkToken }, { refetchOnMountOrArgChange: true });
+const { data: dataOwners, isLoading: ownerLoading,  } =  useGetOwnerUserListQuery( { checkToken }, { refetchOnMountOrArgChange: true });
 
 const loading: boolean = ownerLoading;
 
@@ -86,7 +86,6 @@ const [deleteOwner,] = useDeleteOwnerMutation();
         id
     });
   }
-//console.log("dataOwners ", dataOwners)
 
 return (
    <BodyContainerComponent>

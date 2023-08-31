@@ -38,7 +38,7 @@ function OwnerEditComponent() {
     ])
 
 
-    const { data: dataOwnerIdDetails, isLoading: ownerIdLoading, isError: ownerIdError }= useGetOwnerIdQuery( editId );
+    const { data: dataOwnerIdDetails, isLoading: ownerIdLoading,  }= useGetOwnerIdQuery( editId );
 
     const [updateOwner, responseUpdateOwner] = useUpdateOwnerMutation();
     const [errors, ] = useHookErrorFieldResponse({ response:  responseUpdateOwner });

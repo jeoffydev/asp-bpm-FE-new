@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react'
-import BodyContainerComponent from '../global/BodyContainerComponent';
 import { useParams } from "react-router-dom";
-import OwnerLoginFinalComponent from './OwnerLoginFinalComponent';
 import OwnerLoginComponent from './OwnerLoginComponent';
 
  
@@ -25,10 +23,7 @@ function OwnerCypressFinalLogin() {
         secret,    
     ])
 
-    
-    console.log("EDITID ", editId)
-    console.log("localhost ", localhost)
-    console.log("secret ", secret)
+  
     return (
         <>
             {

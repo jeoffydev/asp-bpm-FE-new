@@ -27,7 +27,6 @@ import FloatingErrorComponent from '../global/FloatingErrorComponent';
 import DialogSimpleComponent from '../global/DialogSimpleComponent';
 import useHookErrorFieldResponse from '../hooks/useHookErrorFieldResponse';
 import RegisterOrgFormComponent from './globalOwner/RegisterOrgFormComponent';
-import DeleteConfirmationComponent from '../global/DeleteConfirmationComponent';
 import DeleteConfirmationNameComponent from '../global/DeleteConfirmationNameComponent';
 
 const ButtonFab = styled(Fab)({ 
@@ -54,7 +53,7 @@ const OwnerCustomerComponent = () => {
     const [errors, ] = useHookErrorFieldResponse({ response:  responseRegisterOrg });
 
     const checkToken = getToken ? true : false;
-    const { data, isLoading, isError } =  useGetOrgListQuery( { checkToken }, { refetchOnMountOrArgChange: true });
+    const { data, isLoading, } =  useGetOrgListQuery( { checkToken }, { refetchOnMountOrArgChange: true });
    
 
     useEffect(()=>{

@@ -57,7 +57,7 @@ const OwnerLoginFinalComponent = () => {
       } = useForm<Inputs>();
 
   
-      const { data, isLoading, isError  }= useFinalizeLoginQuery( editId, { refetchOnMountOrArgChange: true, skip: skipFetch } );
+      const { data, isLoading, }= useFinalizeLoginQuery( editId, { refetchOnMountOrArgChange: true, skip: skipFetch } );
 
 
     const [addOwner, responseAddOwner] = useAddOwnerMutation();
