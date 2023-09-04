@@ -1,12 +1,11 @@
 import React from 'react'; 
+import HeaderComponent from './header/HeaderComponent';
 
  
 
 function HomepageComponent() {
   return (
-   <>
-     <h1>Homepage</h1>
-   </>
+   <HeaderComponent />
   );
 }
 

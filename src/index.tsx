@@ -7,6 +7,8 @@ import reportWebVitals from './reportWebVitals';
 import { store } from './store/store';
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'; 
+import { Internationalization } from './utils/Internationalization';
+import HocWrapper from './HocWrapper';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -14,9 +16,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
      <Provider store={store}>
-        <BrowserRouter>
-                <App />
-          </BrowserRouter>
+          <HocWrapper>
+                  <App />
+         </HocWrapper>
     </Provider>
   </React.StrictMode>
 );
