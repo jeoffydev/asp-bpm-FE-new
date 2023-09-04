@@ -11,6 +11,10 @@ Mockup, project details and Database schema/structure
 
 https://lucid.app/lucidspark/48c6415a-3533-42dd-bb1c-b7a7a5f40f61/edit?viewport_loc=-3132%2C-763%2C6690%2C2942%2C0_0&invitationId=inv_16c3e05e-efb0-47a3-8a46-3a2e97304cf5
 
+UI Components and theme colour:
+https://www.figma.com/file/qqHId7YxmsiVo4cgc06nMR/Component-and-colours?type=design&node-id=0%3A1&mode=design&t=upS1B5RXJBLZilAc-1
+
+
 ## Node version
 
 v18.17.1

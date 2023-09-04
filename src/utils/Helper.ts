@@ -19,6 +19,21 @@ export const colours = {
 }
 
 
+export const themeColours = {
+    violet: '#7525D1',
+    purple: '#8D43BE',
+    pink: '#EA40D5',
+    yellow: '#F5C347',
+    blue: '#2D66F4',
+    lightGrey: '#EDF0F6',
+    darkGrey: '#D9D9D9',
+    black: '#181818',
+    beige: '#181818',
+    white: '#FFFFFF'
+}
+
+
+
 // Owners link
 
 export const ownerUrl = '/owner/dashboard';
