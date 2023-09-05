@@ -38,7 +38,7 @@ function ErrorPageComponent() {
             <Grid item xs={10} md={6}>
                 <BoxComponent >
 
-                    <BannerComponent firstWord='Lost?.' secondWord='HeartBreak?' >
+                    <BannerComponent firstWord='Ooops.' secondWord='Lost?' mobileTextWhite={false} >
                         {intl.formatMessage(msg.generalMessage.errorHome)} 
                         <ButtonHome variant="outlined" startIcon={<WeekendIcon />} onClick={()=>navigate('/')}>
                             Home

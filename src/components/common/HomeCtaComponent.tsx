@@ -9,14 +9,20 @@ import * as msg from '../../utils/messages';
 
 const IconOneWrapper = styled(AutoAwesomeMotionIcon)(() => ({
     color: themeColours.yellow,
-    fontSize: '4.375rem'
+    fontSize: '4.375rem',
+    '@media only screen and (max-width: 600px)': {
+        fontSize: '3.4rem',
+    },
 }));
 
 const IconTwoWrapper = styled(MasksIcon)(() => ({
     color: themeColours.yellow,
     fontSize: '4.375rem',
     position: 'relative',
-    top: '-0.3rem'
+    top: '-0.3rem',
+    '@media only screen and (max-width: 600px)': {
+        fontSize: '3.4rem',
+    },
 }));
 
 const TextWrap = styled('span')(() => ({

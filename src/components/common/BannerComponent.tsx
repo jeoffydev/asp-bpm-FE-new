@@ -12,13 +12,15 @@ const BannerTitle = styled('div', {
    flexDirection: 'row',
    marginTop: marginTop ?? '',
    '@media only screen and (max-width: 600px)': {
-        fontSize: '2rem',
+        fontSize: '1.6rem',
     },
 
 }));
  
 
-const SubTitle = styled('div')(() => ({
+const SubTitle = styled('div', {
+    shouldForwardProp: (prop) => prop !== "mobileTextWhite",
+  })<{ mobileTextWhite?: boolean }>(({ mobileTextWhite })  => ({
     display: 'flex',
     flexDirection: 'row',
     fontWeight: '400',
@@ -26,7 +28,7 @@ const SubTitle = styled('div')(() => ({
     marginTop: '0.2rem',
     '@media only screen and (max-width: 600px)': {
         fontSize: '1rem',
-        color: themeColours.white
+        color: mobileTextWhite ? themeColours.white : ''
     },
 }));
 const FirstWord = styled('span')(() => ({
@@ -52,10 +54,11 @@ type Props = {
     thirdWord?: string,
     marginTop?: string,
     fontSize?: string,
+    mobileTextWhite?: boolean
 }
 
 const BannerComponent: FC<Props> = (props)  => {
-    const { children, firstWord, secondWord, thirdWord, marginTop, fontSize } = props;
+    const { children, firstWord, secondWord, thirdWord, marginTop, fontSize, mobileTextWhite } = props;
   return (
     <>
     <BannerTitle marginTop={marginTop} fontSize={fontSize}>
@@ -63,7 +66,7 @@ const BannerComponent: FC<Props> = (props)  => {
         {secondWord && <SecondWord>{secondWord}</SecondWord>}
         {thirdWord && <ThirdWord data-testid="thirdWord">{thirdWord}</ThirdWord>}
     </BannerTitle>
-    {children && <SubTitle data-testid="subTitle">{children}</SubTitle>}
+    {children && <SubTitle data-testid="subTitle" mobileTextWhite={mobileTextWhite}>{children}</SubTitle>}
     </>
   );
 }
