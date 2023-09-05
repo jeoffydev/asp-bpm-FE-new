@@ -30,7 +30,8 @@ const SubFormWrapper = styled('div')(() => ({
     padding: '0.8rem',
     maxWidth: '20rem',
     '@media only screen and (max-width: 600px)': {
-       backgroundColor: 'rgba(255, 255, 255, 0.5)'
+       backgroundColor: 'rgba(255, 255, 255, 0.5)',
+       maxWidth: '18rem',
     },
 }));
 
@@ -45,7 +46,10 @@ const TextFieldEmail = styled(TextField)(() => ({
     },
     '& input:-internal-autofill-selected': {
         backgroundColor: `${themeColours.white}`
-    }
+    },
+    '@media only screen and (max-width: 600px)': {
+        width: '13rem',
+    },
   
 }));
 
