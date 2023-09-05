@@ -8,6 +8,7 @@ import BannerComponent from '../common/BannerComponent';
 import Button from '@mui/material/Button';
 import WeekendIcon from '@mui/icons-material/Weekend';
 import BoxComponent from '../common/BoxComponent';
+import ThemePageComponent from '../ThemePageComponent';
 
 const GridError = styled(Grid)(() => ({
     textAlign: 'center',
@@ -30,29 +31,34 @@ function ErrorPageComponent() {
     const navigate = useNavigate();
 
   return (
-    <ErrorContainer>
-        <GridError container spacing={2}>
-            <Grid item xs={1} md={3}>
-                &nbsp;
-            </Grid>
-            <Grid item xs={10} md={6}>
-                <BoxComponent >
+    <>
+    <ThemePageComponent>   
+        <ErrorContainer>
+            <GridError container spacing={2}>
+                <Grid item xs={1} md={3}>
+                    &nbsp;
+                </Grid>
+                <Grid item xs={10} md={6}>
+                    <BoxComponent>
 
-                    <BannerComponent firstWord='Ooops.' secondWord='Lost?' mobileTextWhite={false} >
-                        {intl.formatMessage(msg.generalMessage.errorHome)} 
-                        <ButtonHome variant="outlined" startIcon={<WeekendIcon />} onClick={()=>navigate('/')}>
-                            Home
-                        </ButtonHome>
-                    </BannerComponent>
+                        <BannerComponent firstWord='Ooops.' secondWord='Lost?' mobileTextWhite={false} >
+                            {intl.formatMessage(msg.generalMessage.errorHome)} 
+                            <ButtonHome variant="outlined" startIcon={<WeekendIcon />} onClick={()=>navigate('/')}>
+                                Home
+                            </ButtonHome>
+                        </BannerComponent>
 
-                </BoxComponent>
-                
-            </Grid>
-            <Grid item xs={1} md={3}>
-                &nbsp;
-            </Grid>
-        </GridError>
-    </ErrorContainer>
+                    </BoxComponent>
+                    
+                </Grid>
+                <Grid item xs={1} md={3}>
+                    &nbsp;
+                </Grid>
+            </GridError>
+        </ErrorContainer>
+    </ThemePageComponent>
+    </>
+    
   );
 }
 

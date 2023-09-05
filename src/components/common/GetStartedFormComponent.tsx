@@ -20,7 +20,8 @@ const SubTitle = styled('div')(() => ({
     fontSize: '1.125rem',
     marginBottom:'0.5rem',
     '@media only screen and (max-width: 600px)': {
-        color: themeColours.white
+        color: themeColours.white,
+        fontSize: '1rem',
     },
 }));
 
