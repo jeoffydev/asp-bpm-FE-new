@@ -29,9 +29,12 @@ const TextWrap = styled('span')(() => ({
     paddingTop: '0.7rem',
     display: 'block',
     '@media only screen and (max-width: 600px)': {
-        paddingLeft: '1rem'
+        padding: '0.7rem',
+        backgroundColor: 'rgba(255, 255, 255, 0.5)',
+        borderRadius: '0.74rem',
     },
 }));
+
 
  
 type Props = { 
