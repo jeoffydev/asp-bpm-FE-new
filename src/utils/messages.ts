@@ -12,17 +12,21 @@ export const generalMessage = defineMessages({
         id: `${prefix.generalId}.title.loading`,
         defaultMessage: 'Loading...'
     },
+    errorHome: {
+        id: `${prefix.generalId}.title.home`,
+        defaultMessage: 'There is no place like '
+    },
 });
 
 
 export const ctaMessage = defineMessages({
     build: {
         id: `${prefix.ctaId}.title.build`,
-        defaultMessage: 'Build'
+        defaultMessage: 'Build.'
     },
     assign: {
         id: `${prefix.ctaId}.title.assign`,
-        defaultMessage: 'Assign'
+        defaultMessage: 'Assign.'
     },
     track: {
         id: `${prefix.ctaId}.title.track`,
@@ -94,6 +98,6 @@ let d = new Date();
 export const footerMessage = defineMessages({
     footer: {
         id: `${prefix.footerId}.title.footer`,
-        defaultMessage: `&#169; ${d.getFullYear()} BPM. All Rights Reserved.`
+        defaultMessage: `© ${d.getFullYear()} BPM. All Rights Reserved.`
     }
 });
