@@ -14,6 +14,7 @@ import OwnerCustomerDetailsComponent from "./owner/OwnerCustomerDetailsComponent
 import OwnerCustomerEditComponent from "./owner/OwnerCustomerEditComponent";
 import OwnerAdminEditComponent from "./owner/OwnerAdminEditComponent";
 import OwnerCypressFinalLogin from "./owner/OwnerCypressFinalLogin";
+import ErrorPageComponent from "./components/error/ErrorPageComponent";
 
 
 const RouteHolder = () => {
@@ -35,7 +36,7 @@ const RouteHolder = () => {
         <Route path="owner/:id" element={<OwnerEditComponent />}  />
       </Route>
       
-        <Route path="*" element={"ERROR PAGE"} />
+        <Route path="*" element={<ErrorPageComponent />} />
     </Routes>
   )
 }
