@@ -4,7 +4,8 @@ const prefix = {
     generalId: 'generalText',
     loginId: 'loginText',
     ctaId: 'ctaText',
-    footerId:  'footerText'
+    footerId:  'footerText',
+    validationId: 'validationtext'
 };
 
 export const generalMessage = defineMessages({
@@ -53,11 +54,15 @@ export const ctaMessage = defineMessages({
 export const loginMessage = defineMessages({
     contractorLogin: {
         id: `${prefix.loginId}.title.contractorLogin`,
-        defaultMessage: `Contractor Login`
+        defaultMessage: `Contractor`
     },
     adminLogin: {
         id: `${prefix.loginId}.title.adminLogin`,
-        defaultMessage: `Portal  Login`
+        defaultMessage: `Portal`
+    },
+    contractorBtn: {
+        id: `${prefix.loginId}.title.contractorBtn`,
+        defaultMessage: `Verify`
     },
     loginBtn: {
         id: `${prefix.loginId}.title.btnLogin`,
@@ -93,7 +98,19 @@ export const loginMessage = defineMessages({
     }
 });
 
+export const validationMessage = defineMessages({
+    jobNumberRequired: {
+        id: `${prefix.validationId}.title.jobNumber`,
+        defaultMessage: `Job number is required`
+    },
+    emailRequired: {
+        id: `${prefix.validationId}.title.emailRequired`,
+        defaultMessage: `Email Address is required`
+    },
+});
+
 let d = new Date();
+
 
 export const footerMessage = defineMessages({
     footer: {

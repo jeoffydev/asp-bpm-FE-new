@@ -55,7 +55,12 @@ function HeaderComponent() {
     <Container>
         <GridHeader container spacing={2} columnSpacing={{ xs: 1, sm: 4, md: 3 }}>
             <Grid item xs={1}>
-                <Logo></Logo>
+                <Link 
+                     component="button"
+                     variant="body2"
+                     onClick={()=>navigate('/')}
+                     data-cy="logo-link"
+                ><Logo></Logo></Link>
             </Grid>
             <Grid item xs={5} className='leftSection'>
                 <Link
@@ -88,6 +93,7 @@ function HeaderComponent() {
                     variant="body2"
                     onClick={()=>navigate('/login')}
                     className='theme-button'
+                    data-cy="login-link"
                     >
                     Login
                 </Link>

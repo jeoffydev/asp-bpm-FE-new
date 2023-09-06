@@ -5,10 +5,12 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import { themeColours } from '../../utils/Helper';
 
-
-import Button from '@mui/material/Button';
 import { useIntl } from 'react-intl';
 import * as msg from '../../utils/messages'; 
+import ContractorLogin from './ContractorLogin';
+import PortalLogin from './PortalLogin';
+
+
 
 
 interface TabPanelProps {
@@ -39,11 +41,6 @@ const BoxTabWrapper = styled(Tabs)(() => ({
  
 }));
 
-const ButtonLogin = styled(Button)(() => ({
-  width: '100%',
-  borderRadius: '5px',
-  boxShadow: "none",
- }));
 
 
 function CustomTabPanel(props: TabPanelProps) {
@@ -88,16 +85,15 @@ export default function LoginTabsComponent() {
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <BoxTabWrapper value={value} onChange={handleChange} >
-          <BoxTabBtn label="Contractor" {...a11yProps(0)} />
-          <BoxTabBtn label="Portal" {...a11yProps(1)} />
+          <BoxTabBtn label={intl.formatMessage(msg.loginMessage.contractorLogin)} {...a11yProps(0)} />
+          <BoxTabBtn label={intl.formatMessage(msg.loginMessage.adminLogin)} {...a11yProps(1)} />
         </BoxTabWrapper>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        Item One <br />
-        <ButtonLogin className='theme-button' variant="contained"> {intl.formatMessage(msg.loginMessage.contractorLogin)} </ButtonLogin>
+          <ContractorLogin />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Item Two
+          <PortalLogin />
       </CustomTabPanel>
     </Box>
   );

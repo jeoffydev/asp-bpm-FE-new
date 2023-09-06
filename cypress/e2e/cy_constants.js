@@ -17,3 +17,10 @@ export class OwnerRegisterPage
     static regButton = '[data-test-id="regSubmitOwner"]';
     static deleteIcon = '[data-test-id="DeleteIcon"]';
 }
+
+export class Homepage
+{
+    static logoLink = '[data-cy="logo-link"]';
+    static loginLink = '[data-cy="login-link"]';
+    static emailAddressLogin = '[data-cy="emailPortalLogin"]'
+}
