@@ -28,7 +28,8 @@ import { useForm, SubmitHandler } from "react-hook-form"
         padding: '0.3rem 0.7rem',
         fontSize: '1.375rem',
         '@media only screen and (max-width: 600px)': {
-            width: '91%',
+            width: '89.8%',
+            fontSize: '1.1rem',
         },
    }));  
 
