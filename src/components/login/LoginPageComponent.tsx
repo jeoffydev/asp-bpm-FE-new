@@ -12,15 +12,15 @@ function LoginPageComponent() {
     <ThemePageComponent>
       <Container>
           <Grid container spacing={2}>
-              <Grid item xs={1} md={3}>
+              <Grid item xs={0} md={3}>
                   &nbsp;
               </Grid>
-              <Grid item xs={10} md={6}>
+              <Grid item xs={12} md={6}>
                  <BoxComponent>
                     <LoginTabsComponent />
                  </BoxComponent>
               </Grid>
-              <Grid item xs={1} md={3}>
+              <Grid item xs={0} md={3}>
                   &nbsp;
               </Grid>
           </Grid>
