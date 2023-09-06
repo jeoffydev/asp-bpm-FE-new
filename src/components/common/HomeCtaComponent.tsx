@@ -1,4 +1,4 @@
-import  { ReactNode, FC } from 'react';
+
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion';
@@ -11,7 +11,7 @@ const IconOneWrapper = styled(AutoAwesomeMotionIcon)(() => ({
     color: themeColours.yellow,
     fontSize: '4.375rem',
     '@media only screen and (max-width: 600px)': {
-        fontSize: '3.4rem',
+        fontSize: '2.8rem',
     },
 }));
 
@@ -21,7 +21,7 @@ const IconTwoWrapper = styled(MasksIcon)(() => ({
     position: 'relative',
     top: '-0.3rem',
     '@media only screen and (max-width: 600px)': {
-        fontSize: '3.4rem',
+        fontSize: '2.8rem',
     },
 }));
 
@@ -50,23 +50,23 @@ const HomeCtaComponent = (props: Props)  => {
             <Grid item  xs={2} md={2}>
                 <IconOneWrapper />
             </Grid>
-            <Grid item xs={8} md={8}>
+            <Grid item xs={9} md={8}>
                 <TextWrap>
                     {intl.formatMessage(msg.ctaMessage.ctaIconOne)}
                 </TextWrap>
             </Grid>
-            <Grid item  xs={2} md={2}>
+            <Grid item  xs={1} md={2}>
                 &nbsp;
             </Grid>
             <Grid item  xs={2} md={2}>
                 <IconTwoWrapper />
             </Grid>
-            <Grid item xs={8} md={8}>
+            <Grid item xs={9} md={8}>
                 <TextWrap>
                     {intl.formatMessage(msg.ctaMessage.ctaIconTwo)}
                 </TextWrap>
             </Grid>
-            <Grid item  xs={2} md={2}>
+            <Grid item  xs={1} md={2}>
                 &nbsp;
             </Grid>
         </Grid>
