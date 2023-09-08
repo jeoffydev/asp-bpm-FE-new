@@ -5,10 +5,12 @@ import emailjs from '@emailjs/browser';
 type IProps = {
     secretKey: string,
     ifSuccess : boolean,
-    emailTo: string
+    emailTo: string,
+    urlLink?: string,
+    templateCode: string
 }
 export const useLoginEmailTemplate = (props: IProps) => {
-    const { secretKey, ifSuccess, emailTo } = props;
+    const { secretKey, ifSuccess, emailTo, urlLink, templateCode } = props;
     useEffect(()=>{
 
         if( ifSuccess && emailTo ) {
@@ -20,7 +22,7 @@ export const useLoginEmailTemplate = (props: IProps) => {
                 reply_to: 'jhipolito.saas@gmail.com'
             };
             
-            emailjs.send('service_kpn673j', 'template_7mv0non', templateParams, 'yJDunARVI70Df6Pxc')
+            emailjs.send('service_kpn673j', templateCode, templateParams, 'yJDunARVI70Df6Pxc')
                 .then(function(response: any) {
                 console.log('SUCCESS!', response.status, response.text);
                 }, function(error: any) {

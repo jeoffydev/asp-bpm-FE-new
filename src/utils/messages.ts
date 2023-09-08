@@ -95,7 +95,16 @@ export const loginMessage = defineMessages({
     notExist: {
         id: `${prefix.loginId}.title.notExist`,
         defaultMessage: `Page doesn't Exist`
+    },
+    invalidVerification: {
+        id: `${prefix.loginId}.title.invalidVerification`,
+        defaultMessage: `Invalid Verification.`
+    },
+    loginAgain: {
+        id: `${prefix.loginId}.title.loginAgain`,
+        defaultMessage: `Please login again.`
     }
+    
 });
 
 export const validationMessage = defineMessages({

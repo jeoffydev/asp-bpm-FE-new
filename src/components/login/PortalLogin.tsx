@@ -1,9 +1,14 @@
-import * as React from 'react';
-
+import { useState, useEffect } from 'react'
 import { useIntl } from 'react-intl';
 import * as msg from '../../utils/messages'; 
 import { useForm, SubmitHandler } from "react-hook-form"
 import { ErrorLogin, InputLogin, ButtonLogin } from './ContractorLogin';
+import useHookErrorFieldResponse from '../../hooks/useHookErrorFieldResponse';
+import { useCheckAdminEmailLoginMutation } from '../../services/organization/administrator/orgAdministratorSliceApi';
+import { useLoginEmailTemplate } from '../../owner/EmailTemplate/useLoginEmailTemplate';
+import ErrorListDisplayComponent from '../common/ErrorListDisplayComponent';
+import LoadingComponent from '../../global/LoadingComponent';
+import EmailSentMsgComponent from './../common/EmailSentMsgComponent';
 
 
 
@@ -12,27 +17,67 @@ import { ErrorLogin, InputLogin, ButtonLogin } from './ContractorLogin';
   }
   
 export default function PortalLogin() {
-  const intl = useIntl();
+    const intl = useIntl();
+    const [openError, setOpenError] = useState(false);
+    const [emailTo, setEmailto] = useState('');
 
-  const {
-    register,
-    handleSubmit,
-    formState:  { errors: errorForm },
-  } = useForm<Inputs>();
+    const [checkAdminEmail, responsecheckAdminEmail] = useCheckAdminEmailLoginMutation();
+
+    const [errors, ] = useHookErrorFieldResponse({ response: responsecheckAdminEmail});
+
+    
+    // useLoginEmailTemplate({
+    //     secretKey: responsecheckAdminEmail?.data?.data,
+    //     ifSuccess: responsecheckAdminEmail?.isSuccess,
+    //     emailTo: emailTo,
+    //     templateCode: 'template_gcvqnio'
+    // })
+
+       console.log("REMOVE THIS CONSOLE WHENIN ADMIN PROD ", responsecheckAdminEmail?.isSuccess && responsecheckAdminEmail?.data?.data)
+
+    const {
+        register,
+        handleSubmit,
+        formState:  { errors: errorForm },
+    } = useForm<Inputs>();
+
+    useEffect(()=> {
+        if( responsecheckAdminEmail?.isError ) {
+            setOpenError(true);
+        }
+        
+        },[
+            responsecheckAdminEmail
+    ]);
 
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log("PORTAL ADMIN LOGIN ", data)
-}
-
-
+    const onSubmit: SubmitHandler<Inputs> = (data) => {
+        setEmailto(data.email);
+        checkAdminEmail(data);
+    }
 
   return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <InputLogin type='email' placeholder='Email Address' data-testid="emailPortalLogin" data-cy="emailPortalLogin" {...register("email", { required: true })} />
-            {errorForm.email && <ErrorLogin> {intl.formatMessage(msg.validationMessage.emailRequired)} </ErrorLogin>}
-            <ButtonLogin type='submit' className='theme-button' variant="contained"> {intl.formatMessage(msg.loginMessage.loginBtn)} </ButtonLogin>
-        </form>
-     
+        <>
+        {
+            responsecheckAdminEmail?.isSuccess ? (
+                <EmailSentMsgComponent />
+            ) : (
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    {
+                        openError && (
+                            <ErrorListDisplayComponent errors={errors} customMessage='Email address not found.' />
+                        )
+                    }
+                    {
+                        responsecheckAdminEmail?.isLoading && <LoadingComponent isLoading={responsecheckAdminEmail?.isLoading} />
+                    }
+                    <InputLogin disabled={responsecheckAdminEmail?.isLoading} type='email' placeholder='Email Address' data-testid="emailPortalLogin" data-cy="emailPortalLogin" {...register("email", { required: true })} />
+                    {errorForm.email && <ErrorLogin> {intl.formatMessage(msg.validationMessage.emailRequired)} </ErrorLogin>}
+                    <ButtonLogin type='submit' className='theme-button' variant="contained"> {intl.formatMessage(msg.loginMessage.loginBtn)} </ButtonLogin>
+                </form>
+            )
+        }
+        </>
+        
   );
 }

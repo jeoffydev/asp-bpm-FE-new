@@ -2,6 +2,7 @@ import moment from "moment";
 import { appSessionStorageVar } from "../utils/Helper";
 
 export const cookiesAuth_bpm= 'bpm_app_auth';
+export const cookiesOrgAuth_bpm= 'bpm_app_org_auth';
 
 export const saveAuthToStorage = (record: any) => {
     sessionStorage.setItem(appSessionStorageVar, record); 
