@@ -9,6 +9,7 @@ import FloatingErrorComponent from '../global/FloatingErrorComponent';
 import useHookErrorFieldResponse from '../hooks/useHookErrorFieldResponse';
 import Typography from '@mui/material/Typography';
 import { useLoginEmailTemplate } from './EmailTemplate/useLoginEmailTemplate';
+import EmailSentMsgComponent from '../components/common/EmailSentMsgComponent';
 
 const FormWrapper = styled('form')({
     display: 'flex',
@@ -52,7 +53,8 @@ const OwnerLoginInitComponent = () => {
     //   useLoginEmailTemplate({
     //     secretKey: responsecheckOwnerEmail?.data?.data,
     //     ifSuccess: responsecheckOwnerEmail?.isSuccess,
-    //     emailTo: emailTo
+    //     emailTo: emailTo,
+    //      templateCode: 'template_7mv0non'
     //   })
       
       console.log("REMOVE THIS CONSOLE WHEN IN PROD ", responsecheckOwnerEmail?.isSuccess && responsecheckOwnerEmail?.data?.data)
@@ -91,12 +93,7 @@ const OwnerLoginInitComponent = () => {
                     {
                         responsecheckOwnerEmail?.isSuccess ? (
                             <>
-                                <Typography variant="h4" gutterBottom  textAlign={'center'}>
-                                    Email Sent
-                                </Typography>
-                                <Typography variant="h6" gutterBottom  textAlign={'center'}>
-                                    Please check your inbox for the sign in link or sometimes this can land in SPAM!. If it doesn't arrive in a minute or three, please check again.
-                                </Typography> 
+                               <EmailSentMsgComponent />
                             </>
                         ) : (
                             <FormWrapper onSubmit={handleSubmit(onSubmit)}>
