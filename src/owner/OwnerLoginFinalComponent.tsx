@@ -14,6 +14,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import LoadingComponent from '../global/LoadingComponent';
 import { Button, Typography } from '@mui/material';
 import { GridCheckIcon } from '@mui/x-data-grid';
+import { ownerUrl } from '../utils/Helper';
 
 const FormWrapper = styled('form')({
     display: 'flex',
@@ -64,7 +65,9 @@ const OwnerLoginFinalComponent = () => {
     const [errors, ] = useHookErrorFieldResponse({ response: responseAddOwner});
     useAuthenticationUser({ 
           responseAuth: responseAddOwner?.data?.data,
-          responseSuccess: responseAddOwner?.isSuccess
+          responseSuccess: responseAddOwner?.isSuccess,
+          cookiesAuth: cookiesAuth_bpm,
+          redirectUrl: ownerUrl
     });
 
       useEffect(()=> {

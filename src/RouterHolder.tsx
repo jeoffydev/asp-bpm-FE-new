@@ -6,7 +6,7 @@ import HomepageComponent from "./components/HomepageComponent";
 import { ProtectedOwnerRouteComponent } from "./owner/ProtectedOwnerRouteComponent";
 import OwnerCustomerComponent from "./owner/OwnerCustomerComponent";
 import OwnerUserComponent from "./owner/OwnerUserComponent";
-import { ownerUrl } from "./utils/Helper";
+import { ownerUrl, portalUrl } from "./utils/Helper";
 import OwnerEditComponent from "./owner/OwnerEditComponent";
 import OwnerLoginInitComponent from "./owner/OwnerLoginInitComponent";
 import OwnerLoginFinalComponent from "./owner/OwnerLoginFinalComponent";
@@ -17,6 +17,7 @@ import OwnerCypressFinalLogin from "./owner/OwnerCypressFinalLogin";
 import ErrorPageComponent from "./components/error/ErrorPageComponent";
 import LoginPageComponent from "./components/login/LoginPageComponent";
 import LoginPageFinalComponent from "./components/login/LoginPageFinalComponent";
+import { ProtectedOrgRouteComponent } from "./components/organization/ProtectectedOrgRouteComponent";
 
 
 const RouteHolder = () => {
@@ -33,6 +34,10 @@ const RouteHolder = () => {
         <Route path="/owner" element={<OwnerLoginInitComponent />} />
         <Route path="/owner/login/:secret" element={<OwnerLoginFinalComponent />} />
         <Route path="/owner/cypress/:secret" element={<OwnerCypressFinalLogin />} />
+
+      <Route path={portalUrl} element={<ProtectedOrgRouteComponent />}>
+         
+      </Route>
 
       <Route path={ownerUrl} element={<ProtectedOwnerRouteComponent/>}>
         <Route path="customers" element={<OwnerCustomerComponent />} />

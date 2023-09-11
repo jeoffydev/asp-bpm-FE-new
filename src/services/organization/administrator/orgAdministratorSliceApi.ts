@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { apiAdministratorUrl, apiUrlNoresult } from '../../../utils/Helper';
+import { apiAdministratorUrl, apiOrganizationUrl, apiUrlNoresult } from '../../../utils/Helper';
 import { RootState } from '../../../store/store';
 
 export const orgAdministratorSliceApi =  createApi({
@@ -48,12 +48,19 @@ export const orgAdministratorSliceApi =  createApi({
             },
             providesTags: ['orgAdmins'],
           }),
+          getUserOrganization: builder.query({
+            query: () => {
+              return   `${apiOrganizationUrl}/GetUserOrganization`
+            },
+            providesTags: ['orgAdmins'],
+          }),
        
   }),
 })
 export const {
    useCheckAdminEmailLoginMutation,
    useFinalizeLoginQuery,
-   useLoginOrgUserMutation
+   useLoginOrgUserMutation,
+   useGetUserOrganizationQuery
 } = orgAdministratorSliceApi
 

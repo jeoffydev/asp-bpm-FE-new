@@ -1,8 +1,6 @@
 import React, { useState} from 'react'; 
 import { useNavigate } from "react-router-dom";
-import {  useDispatch, useSelector } from 'react-redux'
-import { addAuthenticationUserToken, emptyToken } from '../../services/user/userJwtTokenApi';
-import { addAuthenticationUser, emptyUserAuthState } from '../../services/user/userSliceApi';
+import { useSelector } from 'react-redux'
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -24,8 +22,8 @@ import { colours, ownerUrl } from '../../utils/Helper';
 import Collapse from '@mui/material/Collapse';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { selectUserAuth } from '../../store/selectors';
-import { useCookies } from 'react-cookie';
 import { cookiesAuth_bpm  } from '../../auth/authHelper';
+import SignOut from '../../auth/SignOut';
 
 const BoxWrapperMenu = styled(Box)({ 
     backgroundColor: colours.primaryOrange
@@ -45,33 +43,22 @@ const BoxWrapperMenu = styled(Box)({
   }); 
 
 function OwnerHeaderComponent() {
-   
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const auth = useSelector(selectUserAuth);
-    const [, , removeCookie] = useCookies([cookiesAuth_bpm]);
+    const [logout, setLogout] = useState(false);
+
+    SignOut({
+      isSignOut: logout,
+      cookiesAuth: cookiesAuth_bpm,
+      urlRedirect: '/owner'
+   });
 
     const [state, setState] = useState({
         left: false,
       });
 
  
-
-    const signOutHandler = () => {
-        dispatch(
-          addAuthenticationUserToken(
-              emptyToken
-          )
-        )
-        dispatch(
-          addAuthenticationUser(
-            emptyUserAuthState
-          )
-        )
-        sessionStorage.clear();
-        removeCookie(cookiesAuth_bpm, { path: '/' });
-        navigate('/owner');
-      }
+   
       type Anchor = 'left';
 
       const toggleDrawer =
@@ -165,7 +152,7 @@ function OwnerHeaderComponent() {
             
 
           <SpanName>Welcome, {auth?.fullName}</SpanName>
-          <Button color="inherit" onClick={() => signOutHandler()} ><LogoutIcon /></Button>
+          <Button color="inherit" onClick={() => setLogout(true)} ><LogoutIcon /></Button>
         </Toolbar>
       </AppBarMenu>
     </BoxWrapperMenu>

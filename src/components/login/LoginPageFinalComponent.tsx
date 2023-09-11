@@ -17,6 +17,8 @@ import useHookErrorFieldResponse from '../../hooks/useHookErrorFieldResponse';
 import LoadingComponent from '../../global/LoadingComponent';
 import ErrorListDisplayComponent from '../common/ErrorListDisplayComponent';
 import { ErrorLogin, InputLogin, ButtonLogin } from './ContractorLogin';
+import useAuthenticationUser from '../../hooks/useAuthenticationUser';
+import { portalUrl } from '../../utils/Helper';
 
 type Inputs = {
     email: string
@@ -59,6 +61,13 @@ function LoginPageFinalComponent() {
       const [loginOrgUser, responseLoginOrgUser] = useLoginOrgUserMutation();
 
       const [errors, ] = useHookErrorFieldResponse({ response: responseLoginOrgUser});
+
+      useAuthenticationUser({
+        responseAuth: responseLoginOrgUser?.data?.data,
+        responseSuccess: responseLoginOrgUser?.isSuccess,
+        cookiesAuth: cookiesOrgAuth_bpm,
+        redirectUrl: portalUrl
+      })
 
     const onSubmit: SubmitHandler<Inputs> = (dataLogin) => {
         setSkipFetch(true);

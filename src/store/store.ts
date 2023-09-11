@@ -5,11 +5,15 @@ import { userJwtTokenApiSlice } from '../services/user/userJwtTokenApi';
 import { organizationApiSlice } from '../services/owner/organizationSliceApi';
 import { administratorApiSlice } from '../services/owner/administratorSliceApi';
 import { orgAdministratorSliceApi } from '../services/organization/administrator/orgAdministratorSliceApi';
+import { organizationStoreSliceApi } from './../services/organization/administrator/organizationStoreSliceApi';
+import { organizationUsersStoreSliceApi } from '../services/organization/administrator/organizationUsersStoreSliceApi';
 
 export const store = configureStore({
   reducer: {
     userAuthentication: userSliceApi.reducer,
     userJwtToken: userJwtTokenApiSlice.reducer,
+    orgStoreDetails: organizationStoreSliceApi.reducer, 
+    orgUsersStoreDetails: organizationUsersStoreSliceApi.reducer,
     [ownerApiSlice.reducerPath]: ownerApiSlice.reducer,
     [organizationApiSlice.reducerPath]: organizationApiSlice.reducer,
     [administratorApiSlice.reducerPath]: administratorApiSlice.reducer,
