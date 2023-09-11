@@ -18,6 +18,7 @@ import ErrorPageComponent from "./components/error/ErrorPageComponent";
 import LoginPageComponent from "./components/login/LoginPageComponent";
 import LoginPageFinalComponent from "./components/login/LoginPageFinalComponent";
 import { ProtectedOrgRouteComponent } from "./components/organization/ProtectectedOrgRouteComponent";
+import OrgCypressFinalLogin from "./components/login/OrgCypressFinalLogin";
 
 
 const RouteHolder = () => {
@@ -28,12 +29,13 @@ const RouteHolder = () => {
         <Route path="/" element={<HomepageComponent />} />
         <Route path="/login" element={<LoginPageComponent />} />
         <Route path="/login/continue/:secret" element={<LoginPageFinalComponent />} />
-
+        <Route path="/login/cypress/:secret" element={<OrgCypressFinalLogin />} />
 
 
         <Route path="/owner" element={<OwnerLoginInitComponent />} />
         <Route path="/owner/login/:secret" element={<OwnerLoginFinalComponent />} />
         <Route path="/owner/cypress/:secret" element={<OwnerCypressFinalLogin />} />
+        
 
       <Route path={portalUrl} element={<ProtectedOrgRouteComponent />}>
          

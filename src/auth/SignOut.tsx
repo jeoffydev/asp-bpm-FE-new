@@ -4,6 +4,9 @@ import {  useDispatch } from 'react-redux'
 import { addAuthenticationUserToken, emptyToken } from '../services/user/userJwtTokenApi';
 import { addAuthenticationUser, emptyUserAuthState } from '../services/user/userSliceApi';
 import { useCookies } from 'react-cookie';
+import { addOrgStoreDetails, initialState } from '../services/organization/administrator/organizationStoreSliceApi';
+import { addOrgUsersStoreDetails } from '../services/organization/administrator/organizationUsersStoreSliceApi';
+import { initialState as usersInitial } from './../services/organization/administrator/organizationUsersStoreSliceApi';
 
 interface IProps {
     isSignOut: boolean,
@@ -30,6 +33,16 @@ function SignOut( props: IProps) {
               dispatch(
                 addAuthenticationUser(
                   emptyUserAuthState
+                )
+              )
+              dispatch(
+                addOrgStoreDetails(
+                    initialState
+                )
+              )
+              dispatch(
+                addOrgUsersStoreDetails(
+                    usersInitial
                 )
               )
               sessionStorage.clear();

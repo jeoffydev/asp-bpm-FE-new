@@ -7,7 +7,6 @@ import {  useCheckOwnerEmailLoginMutation } from '../services/owner/ownerSliceAp
 import OwnerFooterComponent from './common/OwnerFooterComponent';
 import FloatingErrorComponent from '../global/FloatingErrorComponent';
 import useHookErrorFieldResponse from '../hooks/useHookErrorFieldResponse';
-import Typography from '@mui/material/Typography';
 import { useLoginEmailTemplate } from './EmailTemplate/useLoginEmailTemplate';
 import EmailSentMsgComponent from '../components/common/EmailSentMsgComponent';
 

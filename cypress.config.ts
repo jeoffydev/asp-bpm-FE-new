@@ -9,6 +9,9 @@ export default defineConfig({
       config.env.PWOWNER = process.env.REACT_APP_PW;
       config.env.LOGINLINK = process.env.REACT_APP_CYPRESS_LOGIN_LINK;
 
+      config.env.EMAILADMIN = process.env.REACT_APP_ADMIN_EMAIL;
+      config.env.PWADMIN = process.env.REACT_APP_ADMIN_PW;
+
 
       // return config
       return config

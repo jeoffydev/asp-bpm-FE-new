@@ -8,6 +8,15 @@ export  class OwnerLoginPage
     static localhostLinkOwners = 'http://localhost:3000/owner/dashboard/owners';
 }
 
+export  class OrgUserLoginPage
+{
+    static loginBtn = '[data-test-id="loginOrgBtn"]';
+    static emailField = 'input[type=email]';
+    static pwField = 'input[type=password]';
+    static localhostLinkOrgUserCypress = 'http://localhost:3000/login/cypress';
+    static localhostLinkOrgUsers = 'http://localhost:3000/portal/dashboard';
+}
+
 export class OwnerRegisterPage
 {
     static regNameOwner = '[data-test-id="regNameOwner"]';
