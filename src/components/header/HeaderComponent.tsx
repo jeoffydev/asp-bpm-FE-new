@@ -1,4 +1,4 @@
-
+import React, { useState } from 'react'; 
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import { styled } from '@mui/material/styles';
@@ -7,6 +7,9 @@ import { themeColours } from '../../utils/Helper';
 import { useNavigate } from "react-router-dom";
 import { useIntl } from 'react-intl';
 import * as msg from '../../utils/navigation'; 
+import { useCookies } from 'react-cookie';
+import { cookiesOrgAuth_bpm } from '../../auth/authHelper';
+import SignOut from '../../auth/SignOut';
 
 const GridHeader = styled(Grid)(() => ({
     padding: '0.75rem 0 0.75rem',
@@ -50,6 +53,14 @@ const Logo = styled('div')(() => ({
 function HeaderComponent() {
     const navigate = useNavigate();
     const intl = useIntl();
+    const [cookies, ] = useCookies([cookiesOrgAuth_bpm]);
+    const [logout, setLogout] = useState(false);
+
+    SignOut({
+        isSignOut: logout,
+        cookiesAuth: cookiesOrgAuth_bpm,
+        urlRedirect: '/login'
+    });
 
   return (
     <Container>
@@ -88,15 +99,32 @@ function HeaderComponent() {
                     >
                     Get Started
                 </Link>
-                <Link
-                    component="button"
-                    variant="body2"
-                    onClick={()=>navigate('/login')}
-                    className='theme-button'
-                    data-cy="login-link"
-                    >
-                    Login
-                </Link>
+                {
+                    cookies?.bpm_app_org_auth?._isAuthenticated ? (
+
+                        <Link
+                            component="button"
+                            variant="body2"
+                            onClick={()=>setLogout(true)}
+                            className='theme-button'
+                            data-cy="login-link"
+                            >
+                            Logout
+                        </Link>
+
+                    ) : (
+                        <Link
+                            component="button"
+                            variant="body2"
+                            onClick={()=>navigate('/login')}
+                            className='theme-button'
+                            data-cy="login-link"
+                            >
+                            Login
+                        </Link>
+                    )
+                }
+               
             </Grid>
         </GridHeader>
     </Container>

@@ -5,23 +5,24 @@ import { IOwnerAdminAuthState, emptyOwnerAdminState } from '../services/owner/ow
 import { addAuthenticationUser } from '../services/user/userSliceApi';
 import { addAuthenticationUserToken } from '../services/user/userJwtTokenApi';
 import { useNavigate } from "react-router-dom";
-import { cookieUserLimit, cookiesAuth_bpm } from '../auth/authHelper';
+import { cookieUserLimit  } from '../auth/authHelper';
 import { useCookies } from 'react-cookie';
-import { ownerUrl } from '../utils/Helper';
 
 
 type IProps = {
     responseAuth: IOwnerAdminAuthState,
-    responseSuccess: boolean
+    responseSuccess: boolean,
+    cookiesAuth: string,
+    redirectUrl: string
 }
  
 
 const  useAuthenticationUser = (props: IProps) => {
-    const { responseAuth, responseSuccess } = props;
+    const { responseAuth, responseSuccess, cookiesAuth, redirectUrl } = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userData, ] = useState<IOwnerAdminAuthState>(emptyOwnerAdminState);
-  const [, setCookie, ] = useCookies([cookiesAuth_bpm]);
+  const [, setCookie, ] = useCookies([cookiesAuth]);
 
   const [tokenKey, ]= useState('')
 
@@ -39,7 +40,7 @@ const  useAuthenticationUser = (props: IProps) => {
                 _tokenKey:responseAuth.tokenKey
             });
             
-            setCookie(cookiesAuth_bpm, record, { path: '/', expires: cookieUserLimit.toDate()})
+            setCookie(cookiesAuth, record, { path: '/', expires: cookieUserLimit.toDate()})
            
             dispatch(
                 addAuthenticationUser(
@@ -53,7 +54,7 @@ const  useAuthenticationUser = (props: IProps) => {
                     }
                 )
             );
-            navigate(`${ownerUrl}`)
+            navigate(`${redirectUrl}`)
         }
   },
   [

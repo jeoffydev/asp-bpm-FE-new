@@ -10,6 +10,7 @@ import FloatingErrorComponent from '../global/FloatingErrorComponent';
 import useHookErrorFieldResponse from '../hooks/useHookErrorFieldResponse';
 import { useCookies } from 'react-cookie';
 import { cookiesAuth_bpm } from '../auth/authHelper';
+import { ownerUrl } from '../utils/Helper';
 
 const FormWrapper = styled('form')({
     display: 'flex',
@@ -50,7 +51,9 @@ const OwnerLoginComponent = () => {
       const [errors, ] = useHookErrorFieldResponse({ response: responseAddOwner});
       useAuthenticationUser({ 
         responseAuth: responseAddOwner?.data?.data,
-        responseSuccess: responseAddOwner?.isSuccess
+        responseSuccess: responseAddOwner?.isSuccess,
+        cookiesAuth: cookiesAuth_bpm,
+        redirectUrl: ownerUrl
     });
      
     const onSubmit: SubmitHandler<Inputs> = (data) => {

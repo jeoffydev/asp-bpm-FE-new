@@ -7,6 +7,7 @@ export const apiAdministratorUrl ='/api/AdministratorApi';
 export const apiUrlNoresult = '/api/NullApi';
 export const ownerRole = 'Owner';
 export const adminRole = 'Admin';
+export const orgRole = 'Organization';
 
 export const colours = {
     primaryOrange: '#FF5733',
@@ -37,6 +38,7 @@ export const themeColours = {
 // Owners link
 
 export const ownerUrl = '/owner/dashboard';
+export const portalUrl = '/portal/dashboard';
 
 
 
