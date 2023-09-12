@@ -5,10 +5,10 @@ import { cookiesOrgAuth_bpm } from "../../auth/authHelper";
 import useGlobalDispatchAuth from "../../hooks/useGlobalDisptachAuth";
 import { useGetUserOrganizationQuery } from "../../services/organization/administrator/orgAdministratorSliceApi";
 import LoadingComponent from "../../global/LoadingComponent";
-import SidebarOrgComponent from "./sidebar/SidebarOrgComponent";
 import { useDispatch } from 'react-redux';
 import { addOrgStoreDetails } from '../../services/organization/administrator/organizationStoreSliceApi';
 import { addOrgUsersStoreDetails } from '../../services/organization/administrator/organizationUsersStoreSliceApi';
+import OrganizationContainerComponent from './OrganizationContainerComponent';
 
 export const ProtectedOrgRouteComponent  = () => {
   // This is where the authentication begin ***************************** 
@@ -53,7 +53,7 @@ export const ProtectedOrgRouteComponent  = () => {
     {
         isLoading ? <LoadingComponent isLoading={isLoading} /> : (
                 <>
-                    <SidebarOrgComponent />
+                <OrganizationContainerComponent>
                     {
                         outlet ? outlet : (
                             <>
@@ -61,6 +61,7 @@ export const ProtectedOrgRouteComponent  = () => {
                             </>
                         )
                     }
+                </OrganizationContainerComponent>
                 </>
         )
     }

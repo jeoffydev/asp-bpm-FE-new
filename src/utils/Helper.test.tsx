@@ -1,5 +1,5 @@
 import { GridColDef } from "@mui/x-data-grid";
-import { createTableGridColumns } from "./Helper";
+import { createTableGridColumns, stringAvatar } from "./Helper";
 import { act } from "react-dom/test-utils";
 import HocWrapper from "../HocWrapper";
 import { render, waitFor } from "@testing-library/react";
@@ -52,3 +52,11 @@ test('createTableGridColumns test',  async () => {
     expect(columnTest[1].field).toBe('headerName');
     }
 });
+
+
+test('stringAvatar() test',  () => {
+    const avatar = stringAvatar('Jeoffy Hipolito');
+    expect(avatar.children).toBe('J');
+    const avatar2 = stringAvatar('CombinedName');
+    expect(avatar2.children).toBe('C'); 
+ }); 
