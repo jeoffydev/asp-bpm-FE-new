@@ -25,6 +25,16 @@ test('OrganizationContainerComponent() without any error', async () => {
         expect(sideBar).toBeInTheDocument();
         fireEvent.click(screen.getByTestId('MenuIcon'));
         expect(sideBar).not.toBeInTheDocument();
+        
+    });
+    fireEvent.click(screen.getByTestId('MenuIcon'));
+    fireEvent.click(screen.getByTestId('avatar-account'));
+    
+    await waitFor(() => {
+        const popup = screen.getByRole('button', {
+            name: /logout/i
+        })
+        expect(popup).toBeInTheDocument()
     });
     
 });

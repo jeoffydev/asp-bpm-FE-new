@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { addOrgStoreDetails } from '../../services/organization/administrator/organizationStoreSliceApi';
 import { addOrgUsersStoreDetails } from '../../services/organization/administrator/organizationUsersStoreSliceApi';
 import OrganizationContainerComponent from './OrganizationContainerComponent';
+import DashboardComponent from './body/DashboardComponent';
 
 export const ProtectedOrgRouteComponent  = () => {
   // This is where the authentication begin ***************************** 
@@ -57,7 +58,7 @@ export const ProtectedOrgRouteComponent  = () => {
                     {
                         outlet ? outlet : (
                             <>
-                            DASHBOARD ORG!
+                                <DashboardComponent />
                             </>
                         )
                     }

@@ -15,6 +15,9 @@ export  class OrgUserLoginPage
     static pwField = 'input[type=password]';
     static localhostLinkOrgUserCypress = 'http://localhost:3000/login/cypress';
     static localhostLinkOrgUsers = 'http://localhost:3000/portal/dashboard';
+    static sidebarMenu = '[data-testid="MenuIcon"]';
+    static sideBarComponent = '[data-testid="sidebar-dashboard"]';
+    static sidebarAvatar = '[data-testid="avatar-account"]';
 }
 
 export class OwnerRegisterPage

@@ -1,10 +1,10 @@
-import  { ReactNode, FC, useState, useEffect } from 'react';
+import  { ReactNode, FC, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import SidebarOrgComponent from "./sidebar/SidebarOrgComponent";
 import { SideBarCloseComponent } from './sidebar/SidebarCloseComponent';
 import { themeColours } from '../../utils/Helper';
-
+import Button from '@mui/material/Button';
 
 const GridSidebar = styled(Grid)(() => ({
     
@@ -17,7 +17,23 @@ const GridBody = styled(Grid)(() => ({
 }));
 
 const BodyWrapper  = styled('div')(() => ({
-    padding: '1.3rem'
+    padding: '0.5rem',
+    position: 'relative'
+}));
+
+export const HeaderButton = styled(Button)(() => ({
+    fontSize: '1.5rem',
+    borderRadius: '5px',
+    boxShadow: "none",
+    textTransform: 'uppercase',
+    padding: '0.2rem 2rem',
+    fontWeight: '600'
+   }));
+
+const FloatingMenuBar = styled('span')(() => ({
+    position: 'absolute',
+    top: '0.5rem',
+    left: '1.5rem'
 }));
 
 type Props = { 
@@ -52,12 +68,16 @@ const OrganizationContainerComponent: FC<Props> = (props)  => {
             }
             <GridBody item xs={12} md={localStore.sideBar}>
                 <BodyWrapper>
-                    {
-                        localStore.sideBar !== nine && (
-                            <SideBarCloseComponent data-testid="sidebar-menu-body" data-cy="sidebar-menu-body" handleClose={handleClose} size={nine} />
-                        )
-                    }
-                    {children}
+                    
+                            {
+                                localStore.sideBar !== nine && (
+                                    <FloatingMenuBar>
+                                        <SideBarCloseComponent data-testid="sidebar-menu-body" data-cy="sidebar-menu-body" handleClose={handleClose} size={nine} />
+                                    </FloatingMenuBar>
+                                )
+                            }
+                            {children}
+                    
                 </BodyWrapper>
             </GridBody>
         </Grid>
