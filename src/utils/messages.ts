@@ -5,7 +5,8 @@ const prefix = {
     loginId: 'loginText',
     ctaId: 'ctaText',
     footerId:  'footerText',
-    validationId: 'validationtext'
+    validationId: 'validationtext',
+    orgDashboardId: 'orgDashboardText'
 };
 
 export const generalMessage = defineMessages({
@@ -16,6 +17,13 @@ export const generalMessage = defineMessages({
     errorHome: {
         id: `${prefix.generalId}.title.home`,
         defaultMessage: 'There is no place like '
+    },
+});
+
+export const orgPortal = defineMessages({
+    addProject: {
+        id: `${prefix.orgDashboardId}.title.addProject`,
+        defaultMessage: 'Add Project'
     },
 });
 
@@ -91,6 +99,14 @@ export const loginMessage = defineMessages({
     login: {
         id: `${prefix.loginId}.title.login`,
         defaultMessage: `Login`
+    },
+    logout: {
+        id: `${prefix.loginId}.title.logout`,
+        defaultMessage: `Logout`
+    },
+     editAccount: {
+        id: `${prefix.loginId}.title.editAccount`,
+        defaultMessage: `Edit Account`
     },
     notExist: {
         id: `${prefix.loginId}.title.notExist`,
