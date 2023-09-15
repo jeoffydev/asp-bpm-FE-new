@@ -12,7 +12,7 @@ const  ThemePageComponent: FC<Props> = (props)  => {
    <>
     <HeaderComponent />
         {children}
-    <FooterComponent />
+    <FooterComponent paddingTop='2.5rem' />
    </>
   );
 }

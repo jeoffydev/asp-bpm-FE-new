@@ -60,7 +60,11 @@ export default function PortalLogin() {
         <>
         {
             responsecheckAdminEmail?.isSuccess ? (
-                <EmailSentMsgComponent />
+                <>
+                    <EmailSentMsgComponent />
+                    {responsecheckAdminEmail?.data?.data}
+                </>
+                
             ) : (
                 <form onSubmit={handleSubmit(onSubmit)}>
                     {
