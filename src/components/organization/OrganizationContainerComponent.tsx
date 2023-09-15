@@ -5,6 +5,7 @@ import SidebarOrgComponent from "./sidebar/SidebarOrgComponent";
 import { SideBarCloseComponent } from './sidebar/SidebarCloseComponent';
 import { themeColours } from '../../utils/Helper';
 import Button from '@mui/material/Button';
+import FooterComponent from '../footer/FooterComponent';
 
 const GridSidebar = styled(Grid)(() => ({
     
@@ -79,6 +80,7 @@ const OrganizationContainerComponent: FC<Props> = (props)  => {
                             {children}
                     
                 </BodyWrapper>
+                <FooterComponent />
             </GridBody>
         </Grid>
     )

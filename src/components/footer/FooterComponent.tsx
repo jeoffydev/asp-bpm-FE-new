@@ -11,16 +11,20 @@ const GridFooter = styled(Grid)(() => ({
     
 }));
 
-const FooterContainer = styled(Grid)(() => ({
-     padding: '2rem 0'
-    
+const FooterContainer = styled(Grid, {  shouldForwardProp: (prop) => prop !== "paddingTop",
+})<{ paddingTop?: string }>(({ paddingTop })  => ({
+     padding: paddingTop ? `${paddingTop} 0` : '0'
 }));
-function FooterComponent() {
+interface IProps {
+    paddingTop?: string 
+}
+function FooterComponent(props: IProps) {
     const intl = useIntl();
+    const { paddingTop } = props;
 
   return (
     <FooterContainer>
-        <GridFooter container spacing={2}>
+        <GridFooter container spacing={2} paddingTop={paddingTop}>
             <Grid item xs={12}>
                 {intl.formatMessage(msg.footerMessage.footer)}
             </Grid>
