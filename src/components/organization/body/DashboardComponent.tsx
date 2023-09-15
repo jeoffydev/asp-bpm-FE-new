@@ -13,6 +13,9 @@ const GridCenter = styled('div')(() => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
+    '& .banner-titles': {
+        fontSize: '0.95rem'
+    }
 
   }));
 
