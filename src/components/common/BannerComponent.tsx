@@ -61,7 +61,7 @@ const BannerComponent: FC<Props> = (props)  => {
     const { children, firstWord, secondWord, thirdWord, marginTop, fontSize, mobileTextWhite } = props;
   return (
     <>
-    <BannerTitle marginTop={marginTop} fontSize={fontSize}>
+    <BannerTitle marginTop={marginTop} fontSize={fontSize} className={'banner-titles'}>
         {firstWord && <FirstWord data-testid="firstWord">{firstWord}</FirstWord>}
         {secondWord && <SecondWord>{secondWord}</SecondWord>}
         {thirdWord && <ThirdWord data-testid="thirdWord">{thirdWord}</ThirdWord>}

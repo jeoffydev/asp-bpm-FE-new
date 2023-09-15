@@ -17,6 +17,7 @@ export const ActiveJobButton = styled(Button)(() => ({
     },
     '@media only screen and (max-width: 600px)': {
         padding: '0.2rem 0.4rem',
+        minWidth: '0'
     },
 
 }));
