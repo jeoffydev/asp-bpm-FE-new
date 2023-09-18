@@ -27,6 +27,22 @@ export const orgPortal = defineMessages({
     },
 });
 
+export const orgPortalDashboard = defineMessages({
+    needHelp: {
+        id: `${prefix.orgDashboardId}.title.needHelp`,
+        defaultMessage: 'Need Support?'
+    },
+    supportContact: {
+        id: `${prefix.orgDashboardId}.title.supportContact`,
+        defaultMessage: 'Got a question or need some help?'
+    },
+    getInTouch: {
+        id: `${prefix.orgDashboardId}.title.getInTouch`,
+        defaultMessage: 'Get in touch'
+    }
+});
+
+
 
 export const ctaMessage = defineMessages({
     build: {
