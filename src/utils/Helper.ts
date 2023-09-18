@@ -8,6 +8,7 @@ export const apiUrlNoresult = '/api/NullApi';
 export const ownerRole = 'Owner';
 export const adminRole = 'Admin';
 export const orgRole = 'Organization';
+export const ownerEmailAddress = 'jhipolito.saas@gmail.com'
 
 export const colours = {
     primaryOrange: '#FF5733',
@@ -29,7 +30,7 @@ export const themeColours = {
     lightGrey: '#EDF0F6',
     darkGrey: '#D9D9D9',
     black: '#181818',
-    beige: '#181818',
+    beige: '#F1EDE7',
     white: '#FFFFFF'
 }
 
