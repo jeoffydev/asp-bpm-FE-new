@@ -12,7 +12,7 @@ const AddPropertyComponent = ()  => {
 
     return (
          <>
-            <HeaderSectionComponent message='' showButton={false} handleClick={()=>{}} >
+            <HeaderSectionComponent message='' showButton={false} handleClick={()=>{}} homeButton={true} >
                 <AddIcon />
             </HeaderSectionComponent>
 

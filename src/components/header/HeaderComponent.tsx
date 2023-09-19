@@ -3,14 +3,14 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import { styled } from '@mui/material/styles';
 import Link from '@mui/material/Link';
-import { themeColours } from '../../utils/Helper';
+import { portalUrl, themeColours } from '../../utils/Helper';
 import { useNavigate } from "react-router-dom";
 import { useIntl } from 'react-intl';
 import * as msg from '../../utils/navigation'; 
 import { useCookies } from 'react-cookie';
 import { cookiesOrgAuth_bpm } from '../../auth/authHelper';
 import SignOut from '../../auth/SignOut';
-
+import HomeIcon from '@mui/icons-material/Home';
 const GridHeader = styled(Grid)(() => ({
     padding: '0.75rem 0 0.75rem',
     position: 'relative',
@@ -101,16 +101,24 @@ function HeaderComponent() {
                 </Link>
                 {
                     cookies?.bpm_app_org_auth?._isAuthenticated ? (
-
-                        <Link
-                            component="button"
-                            variant="body2"
-                            onClick={()=>setLogout(true)}
-                            className='theme-button'
-                            data-cy="login-link"
-                            >
-                            Logout
-                        </Link>
+                        <>
+                            <Link
+                                component="button"
+                                variant="body2"
+                                onClick={()=>navigate(portalUrl)}
+                                >
+                                <HomeIcon />
+                            </Link>
+                            <Link
+                                component="button"
+                                variant="body2"
+                                onClick={()=>setLogout(true)}
+                                className='theme-button'
+                                data-cy="login-link"
+                                >
+                                Logout
+                            </Link>
+                        </>
 
                     ) : (
                         <Link
