@@ -1,4 +1,4 @@
-import  { ReactNode, FC } from 'react';
+
 import HeaderSectionComponent from '../header/HeaderSectionComponent';
 import AddIcon from '@mui/icons-material/Add';
 import { useIntl } from 'react-intl';
@@ -9,8 +9,8 @@ import { styled } from '@mui/material/styles';
 import BoxThemeComponent from './common/BoxThemeComponent';
 import { Grid, Typography } from '@mui/material';
 import { Link } from "react-router-dom";
-import { ownerEmailAddress, themeColours } from '../../../utils/Helper';
-
+import { ownerEmailAddress, portalUrl, themeColours } from '../../../utils/Helper';
+import { useNavigate } from "react-router-dom";
 
 const GridCenter = styled('div')(() => ({
     display: 'flex',
@@ -53,21 +53,19 @@ const GridCenterBoxes = styled(Grid)(() => ({
      marginLeft: '0.5rem'
    }));
 
-type Props = { 
-    children?: ReactNode;
-}
 
-const DashboardComponent: FC<Props> = (props)  => {
-    const { children  } = props;
+
+const DashboardComponent = ()  => {
     const intl = useIntl();
 
+    const navigate = useNavigate();
     const handleClick = () => {
-        console.log("CLICKED!")
+        navigate(`${portalUrl}/add-property`);
     }
     
     return (
          <>
-            <HeaderSectionComponent message={intl.formatMessage(msg.orgPortal.addProject)} handleClick={handleClick}>
+            <HeaderSectionComponent message={intl.formatMessage(msg.orgPortal.addProperty)} showButton={true} handleClick={handleClick}>
                 <AddIcon />
             </HeaderSectionComponent>
 

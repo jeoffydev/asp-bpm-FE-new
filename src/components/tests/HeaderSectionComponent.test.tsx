@@ -6,7 +6,7 @@ import HeaderSectionComponent from '../organization/header/HeaderSectionComponen
 beforeEach(() => {
     render(
         <HocWrapper>
-            <HeaderSectionComponent handleClick={()=>{}} message='Add Project'> <AddIcon /> </HeaderSectionComponent>
+            <HeaderSectionComponent handleClick={()=>{}} message='Add Project' showButton={true}> <AddIcon /> </HeaderSectionComponent>
         </HocWrapper>
     );
 });

@@ -20,17 +20,18 @@ const GridHeader  = styled(Grid)(() => ({
 type Props = { 
     children?: ReactNode;
     message: string;
-    handleClick: ()=>void
+    handleClick: ()=>void;
+    showButton?: boolean
 }
 
 const HeaderSectionComponent: FC<Props> = (props)  => {
-    const { children, message, handleClick } = props;
+    const { children, message, handleClick, showButton } = props;
     return (
         <Grid container spacing={1}>
                         <GridHeader item xs={12} md={12}>
                              <HeaderSearchComponent handleClick={()=>{}} />
                              <HeaderJobCountComponent count={5} handleClick={()=>{}} />
-                             <HeaderButtonComponent message={message} handleClick={handleClick}> {  children } </HeaderButtonComponent>
+                             { showButton && <HeaderButtonComponent message={message} handleClick={handleClick}> {  children } </HeaderButtonComponent>}
                         </GridHeader>
         </Grid> 
     )

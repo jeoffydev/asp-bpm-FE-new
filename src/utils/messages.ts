@@ -21,10 +21,14 @@ export const generalMessage = defineMessages({
 });
 
 export const orgPortal = defineMessages({
-    addProject: {
-        id: `${prefix.orgDashboardId}.title.addProject`,
-        defaultMessage: 'Add Project'
+    addProperty: {
+        id: `${prefix.orgDashboardId}.title.addProperty`,
+        defaultMessage: 'Add Property'
     },
+    editAccount: {
+        id: `${prefix.orgDashboardId}.title.editAccount`,
+        defaultMessage: 'Edit Account'
+    }
 });
 
 export const orgPortalDashboard = defineMessages({

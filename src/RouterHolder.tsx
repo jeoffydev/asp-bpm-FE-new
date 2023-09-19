@@ -19,6 +19,8 @@ import LoginPageComponent from "./components/login/LoginPageComponent";
 import LoginPageFinalComponent from "./components/login/LoginPageFinalComponent";
 import { ProtectedOrgRouteComponent } from "./components/organization/ProtectectedOrgRouteComponent";
 import OrgCypressFinalLogin from "./components/login/OrgCypressFinalLogin";
+import EditAccountComponent from "./components/organization/body/EditAccountComponent";
+import AddPropertyComponent from "./components/organization/body/property/AddPropertyComponent";
 
 
 const RouteHolder = () => {
@@ -38,6 +40,8 @@ const RouteHolder = () => {
         
 
       <Route path={portalUrl} element={<ProtectedOrgRouteComponent />}>
+        <Route path="edit-account" element={<EditAccountComponent />} />
+        <Route path="add-property" element={<AddPropertyComponent />} />
          
       </Route>
 

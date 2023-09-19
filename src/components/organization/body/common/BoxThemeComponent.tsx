@@ -1,7 +1,6 @@
 import  { ReactNode, FC } from 'react';
 import { styled } from '@mui/material/styles'; 
 import { themeColours } from '../../../../utils/Helper';
-import BoxComponent from '../../../common/BoxComponent';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
@@ -55,7 +54,7 @@ const BoxThemeComponent: FC<Props> = (props)  => {
   
     
     return (
-         <BoxWrapper backgroundColor={themeColours.beige}   maxWidth={maxWidth} width={width}>
+         <BoxWrapper backgroundColor={backgroundColor}  marginTop={marginTop}   maxWidth={maxWidth} width={width}>
             <InsideBox data-testid="box-theme-component-test">
                 {children}
             </InsideBox>

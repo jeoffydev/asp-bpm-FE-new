@@ -16,6 +16,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Button from '@mui/material/Button';
 import { useIntl } from 'react-intl';
 import * as msg from '../../../utils/messages'; 
+import { portalUrl } from './../../../utils/Helper';
 
 const GridSidebar = styled('div')(() => ({
     backgroundColor: themeColours.lightGrey,
@@ -94,7 +95,7 @@ function SidebarOrgComponent( props: IProps) {
                     horizontal: 'left',
                     }}
                 >
-                    <Button color="inherit" onClick={() => navigate('/edit-account')} >  {intl.formatMessage(msg.loginMessage.editAccount)}</Button>
+                    <Button color="inherit" onClick={() => navigate(`${portalUrl}/edit-account`)} >  {intl.formatMessage(msg.loginMessage.editAccount)}</Button>
                      <Button color="inherit" onClick={() => setLogout(true)} ><LogoutIcon /> {intl.formatMessage(msg.loginMessage.logout)}</Button>
                 </PopoverBox>
             </Grid>
