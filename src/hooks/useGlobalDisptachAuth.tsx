@@ -1,7 +1,6 @@
 import { useEffect} from 'react';
 import { useDispatch } from 'react-redux';
 import { addAuthenticationUserToken } from "../services/user/userJwtTokenApi";
-import { addAuthenticationUser } from "../services/user/userSliceApi";
 import { useCookies } from 'react-cookie';
 
 type Props = {
@@ -27,18 +26,7 @@ const  useGlobalDispatchAuth = (props: Props) => {
                   }
               )
             )
-            dispatch(
-              addAuthenticationUser(
-                {
-                    id: cookiesPath._id,
-                    email: cookiesPath._email,
-                    fullName: cookiesPath._fullName,
-                    roleName: cookiesPath._roleName,
-                    roleId: cookiesPath._roleId,
-                    isAuthenticated: cookiesPath._isAthenticated
-                }
-              )
-            )
+           
         }    
     },
     [

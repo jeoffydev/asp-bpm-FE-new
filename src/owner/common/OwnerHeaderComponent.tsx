@@ -150,8 +150,8 @@ function OwnerHeaderComponent() {
             BMS
           </Typography>
             
-
-          <SpanName>Welcome, {auth?.fullName}</SpanName>
+          
+          <SpanName>Welcome, {auth?.fullName as string}</SpanName>
           <Button color="inherit" onClick={() => setLogout(true)} ><LogoutIcon /></Button>
         </Toolbar>
       </AppBarMenu>

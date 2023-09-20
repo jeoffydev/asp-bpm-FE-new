@@ -24,7 +24,12 @@ export const StyledButton = styled(Button)(() => ({
     },
     '@media only screen and (max-width: 600px)': {
         padding: '0.2rem 0.4rem',
-        minWidth: '0'
+        minWidth: '0',
+        marginRight: '0.2rem',
+         fontSize: '0.80rem',
+        '& svg': {
+            marginRight: '0.2rem'
+        },
     },
 
 }));

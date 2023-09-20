@@ -1,25 +1,55 @@
-import  { ReactNode, FC } from 'react';
+import  { useState, useEffect } from 'react';
 import BoxThemeComponent from '../BoxThemeComponent';
 import { TextFieldTheme } from '../../../../../utils/UIHelperForm';
 import { useIntl } from 'react-intl';
 import * as msg from '../../../../../utils/messages'; 
+import {  useUpdateUserDetailsMutation } from '../../../../../services/organization/administrator/orgAdministratorSliceApi';
+import useHookErrorFieldResponse from '../../../../../hooks/useHookErrorFieldResponse';
+import LoadingComponent from '../../../../../global/LoadingComponent';
+import ErrorListDisplayComponent from '../../../../common/ErrorListDisplayComponent';
 
 
-type Props = { 
-   
-}
 
-const EditFullnameComponent = (props: Props) => {
+const EditFullnameComponent = () => {
     const intl = useIntl();
+    const [fullName, setFullName] = useState('');
+    const [openError, setOpenError] = useState(false);
+    const [updateUserDetails, responseUpdateUserDetails] = useUpdateUserDetailsMutation();
+    const [errors, ] = useHookErrorFieldResponse({ response:  responseUpdateUserDetails });
+
+    useEffect(()=> {
+        if( responseUpdateUserDetails?.isSuccess ) {
+            setFullName('');
+        }
+        if( responseUpdateUserDetails?.isError ) {
+            setOpenError(true);
+        }
+    },[
+        responseUpdateUserDetails?.isSuccess,
+        responseUpdateUserDetails?.isError
+    ]);
+
     const handleEdit = () => {
-        console.log("UPDATE NAME! ")
+        updateUserDetails({
+            fullName
+        });
     }
 
   return (
     <>
         <BoxThemeComponent buttonText={intl.formatMessage(msg.formMessage.updateDetails)} handleClick={handleEdit}>
+            {
+                    responseUpdateUserDetails?.isLoading && <LoadingComponent isLoading={responseUpdateUserDetails?.isLoading} />
+            }   
+             {
+                openError && (
+                        <>
+                           <ErrorListDisplayComponent errors={errors}  />
+                        </>
+                        )
+            }
             <form>
-                <TextFieldTheme data-testid="fullname-edit" id="outlined-basic" label={intl.formatMessage(msg.formMessage.fullName)} variant="outlined" />
+                <TextFieldTheme required={true} value={fullName} onChange={(e)=>setFullName(e.target.value)} data-testid="fullname-edit" id="outlined-basic" label={intl.formatMessage(msg.formMessage.fullName)} variant="outlined" />
             </form>
         </BoxThemeComponent>
     </>
