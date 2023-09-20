@@ -10,6 +10,7 @@ import { addOrgStoreDetails } from '../../services/organization/administrator/or
 import { addOrgUsersStoreDetails } from '../../services/organization/administrator/organizationUsersStoreSliceApi';
 import OrganizationContainerComponent from './OrganizationContainerComponent';
 import DashboardComponent from './body/DashboardComponent';
+import { addAuthenticationUser } from '../../services/user/userSliceApi';
 
 export const ProtectedOrgRouteComponent  = () => {
   // This is where the authentication begin ***************************** 
@@ -29,18 +30,31 @@ export const ProtectedOrgRouteComponent  = () => {
 
 
     useEffect(() => {
-        if( data?.data?.organizationDetails?.data ) {
+        if( data?.data?.organizationDetails?.data &&  data?.data?.userDetails?.data) {
             dispatch(
                 addOrgStoreDetails(data.data.organizationDetails.data)
             )
             dispatch(
                 addOrgUsersStoreDetails(data.data.organizationDetails.data)
             )
+            dispatch(
+                addAuthenticationUser(
+                    {
+                        id: data?.data?.userDetails?.data?.id,
+                        email: data?.data?.userDetails?.data?.email,
+                        fullName: data?.data?.userDetails?.data?.fullName,
+                        roleName: data?.data?.userDetails?.data?.roleName,
+                        roleId: data?.data?.userDetails?.data?.authRoleId,
+                        isAuthenticated: true
+                    }
+                )
+            )
         }    
     },
     [
         dispatch,
-        data?.data?.organizationDetails?.data
+        data?.data?.organizationDetails?.data,
+        data?.data?.userDetails?.data
     ]);
 
   if ((!isAuthenticated as boolean || !isAuthenticated) 

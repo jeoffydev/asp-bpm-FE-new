@@ -33,7 +33,6 @@ const  useAuthenticationUser = (props: IProps) => {
             var record = JSON.stringify({
                 _id: responseAuth.id,
                 _email: responseAuth.email,
-                _fullName: responseAuth.fullName,
                 _roleName: responseAuth.roleName,
                 _roleId: responseAuth.roleId,
                 _isAuthenticated: true,
