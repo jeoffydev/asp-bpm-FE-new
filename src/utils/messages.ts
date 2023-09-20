@@ -6,8 +6,34 @@ const prefix = {
     ctaId: 'ctaText',
     footerId:  'footerText',
     validationId: 'validationtext',
-    orgDashboardId: 'orgDashboardText'
+    orgDashboardId: 'orgDashboardText',
+    formPortal: 'formPortal'
 };
+
+
+
+export const formMessage = defineMessages({
+    fullName: {
+        id: `${prefix.generalId}.title.fullname`,
+        defaultMessage: 'Full Name'
+    },
+    updateDetails: {
+        id: `${prefix.generalId}.title.updateDetails`,
+        defaultMessage: 'Update Details'
+    },
+    updatePassword: {
+        id: `${prefix.generalId}.title.updatePassword`,
+        defaultMessage: 'Update Password'
+    },
+    password: {
+        id: `${prefix.loginId}.title.password`,
+        defaultMessage: `Password`
+    },
+    confirmPassword: {
+        id: `${prefix.loginId}.title.confirmPassword`,
+        defaultMessage: `Confirm Password`
+    },
+});
 
 export const generalMessage = defineMessages({
     loading: {
@@ -18,6 +44,10 @@ export const generalMessage = defineMessages({
         id: `${prefix.generalId}.title.home`,
         defaultMessage: 'There is no place like '
     },
+    welcome: {
+        id: `${prefix.generalId}.title.welcome`,
+        defaultMessage: 'Welcome, '
+    }
 });
 
 export const orgPortal = defineMessages({
@@ -27,8 +57,21 @@ export const orgPortal = defineMessages({
     },
     editAccount: {
         id: `${prefix.orgDashboardId}.title.editAccount`,
-        defaultMessage: 'Edit Account'
-    }
+        defaultMessage: 'Edit Profile'
+    },
+    editName: {
+        id: `${prefix.orgDashboardId}.title.editName`,
+        defaultMessage: 'Edit Name'
+    },
+    editDetails: {
+        id: `${prefix.orgDashboardId}.title.editDetails`,
+        defaultMessage: 'Edit Details'
+    },
+    editPassword: {
+        id: `${prefix.orgDashboardId}.title.editPassword`,
+        defaultMessage: 'Edit Password'
+    },
+   
 });
 
 export const orgPortalDashboard = defineMessages({
@@ -126,7 +169,7 @@ export const loginMessage = defineMessages({
     },
      editAccount: {
         id: `${prefix.loginId}.title.editAccount`,
-        defaultMessage: `Edit Account`
+        defaultMessage: `Edit Profile`
     },
     notExist: {
         id: `${prefix.loginId}.title.notExist`,

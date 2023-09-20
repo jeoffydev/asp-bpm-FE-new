@@ -17,6 +17,7 @@ import Button from '@mui/material/Button';
 import { useIntl } from 'react-intl';
 import * as msg from '../../../utils/messages'; 
 import { portalUrl } from './../../../utils/Helper';
+import { Typography } from '@mui/material';
 
 const GridSidebar = styled('div')(() => ({
     backgroundColor: themeColours.lightGrey,
@@ -33,6 +34,7 @@ const AvatarButton = styled('span')(() => ({
 }));
 
 const PopoverBox = styled(Popover)(() => ({
+    textAlign: 'center',
     '& .MuiPopover-paper': {
         padding: '1.2rem',
         borderRadius: '1.3rem', 
@@ -95,7 +97,8 @@ function SidebarOrgComponent( props: IProps) {
                     horizontal: 'left',
                     }}
                 >
-                    <Button color="inherit" onClick={() => navigate(`${portalUrl}/edit-account`)} >  {intl.formatMessage(msg.loginMessage.editAccount)}</Button>
+                     <Typography variant='body2'> {intl.formatMessage(msg.generalMessage.welcome)} {userDetails?.fullName} </Typography>   
+                     <Button color="inherit" onClick={() => navigate(`${portalUrl}/edit-account`)} >  {intl.formatMessage(msg.loginMessage.editAccount)}</Button>
                      <Button color="inherit" onClick={() => setLogout(true)} ><LogoutIcon /> {intl.formatMessage(msg.loginMessage.logout)}</Button>
                 </PopoverBox>
             </Grid>
