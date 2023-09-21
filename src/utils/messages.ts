@@ -33,6 +33,14 @@ export const formMessage = defineMessages({
         id: `${prefix.loginId}.title.confirmPassword`,
         defaultMessage: `Confirm Password`
     },
+    updatePasswordDone: {
+        id: `${prefix.generalId}.title.updatePasswordDone`,
+        defaultMessage: 'Password updated successfully.'
+    },
+    updateDetailsDone: {
+        id: `${prefix.generalId}.title.updateDetailsDone`,
+        defaultMessage: 'Profile updated successfully.'
+    },
 });
 
 export const generalMessage = defineMessages({

@@ -20,6 +20,7 @@ export  class OrgUserLoginPage
     static sidebarAvatar = '[data-testid="avatar-account"]';
 }
 
+
 export class OwnerRegisterPage
 {
     static regNameOwner = '[data-test-id="regNameOwner"]';

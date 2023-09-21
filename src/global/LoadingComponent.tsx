@@ -12,6 +12,7 @@ const LoadingComponent = (props: IProps) => {
         <Backdrop
             sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
             open={isLoading}
+            data-testid="loading-test"
       >
         <CircularProgress color="inherit" />
       </Backdrop>
