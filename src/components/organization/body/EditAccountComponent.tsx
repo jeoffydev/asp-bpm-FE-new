@@ -75,10 +75,10 @@ const EditAccountComponent = ()  => {
                                             <AdminPanelSettingsIcon /> { userDetails?.roleName}
                                         </List>
                                     </ListUl>
-                                    <ButtonComponent handleClick={handleEdit}>
+                                    <ButtonComponent handleClick={handleEdit} disabled={editDetails}>
                                         <EditIcon /> {intl.formatMessage(msg.orgPortal.editDetails)}
                                     </ButtonComponent>
-                                    <ButtonComponent handleClick={handleEdit}>
+                                    <ButtonComponent handleClick={handleEdit} disabled={!editDetails}>
                                         <LockIcon /> {intl.formatMessage(msg.orgPortal.editPassword)}
                                     </ButtonComponent>
                                     <SpaceDivider />

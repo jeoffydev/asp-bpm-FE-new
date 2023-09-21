@@ -65,6 +65,17 @@ export const orgAdministratorSliceApi =  createApi({
             },
             invalidatesTags: ['orgAdmins'],
           }),
+          updateUserPassword: builder.mutation({
+            query: (payload) => { 
+              const { ...body } = payload;
+              return {
+                url: `${apiAdministratorUrl}/UpdateUserPasswordByClaims`,
+                method: 'PUT',
+                body,
+              }
+            },
+            invalidatesTags: ['orgAdmins'],
+          }),
        
   }),
 })
@@ -73,6 +84,7 @@ export const {
    useFinalizeLoginQuery,
    useLoginOrgUserMutation,
    useGetUserOrganizationQuery,
-   useUpdateUserDetailsMutation
+   useUpdateUserDetailsMutation,
+   useUpdateUserPasswordMutation
 } = orgAdministratorSliceApi
 

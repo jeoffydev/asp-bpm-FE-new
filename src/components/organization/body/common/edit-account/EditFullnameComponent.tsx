@@ -7,7 +7,7 @@ import {  useUpdateUserDetailsMutation } from '../../../../../services/organizat
 import useHookErrorFieldResponse from '../../../../../hooks/useHookErrorFieldResponse';
 import LoadingComponent from '../../../../../global/LoadingComponent';
 import ErrorListDisplayComponent from '../../../../common/ErrorListDisplayComponent';
-
+import CheckIcon from '@mui/icons-material/Check';
 
 
 const EditFullnameComponent = () => {
@@ -40,13 +40,20 @@ const EditFullnameComponent = () => {
         <BoxThemeComponent buttonText={intl.formatMessage(msg.formMessage.updateDetails)} handleClick={handleEdit}>
             {
                     responseUpdateUserDetails?.isLoading && <LoadingComponent isLoading={responseUpdateUserDetails?.isLoading} />
-            }   
+            } 
              {
                 openError && (
                         <>
                            <ErrorListDisplayComponent errors={errors}  />
                         </>
                         )
+            }
+            {
+                responseUpdateUserDetails?.isSuccess && (
+                    <>
+                        <CheckIcon color='success' /> {intl.formatMessage(msg.formMessage.updateDetailsDone)} 
+                    </>
+                )
             }
             <form>
                 <TextFieldTheme required={true} value={fullName} onChange={(e)=>setFullName(e.target.value)} data-testid="fullname-edit" id="outlined-basic" label={intl.formatMessage(msg.formMessage.fullName)} variant="outlined" />
