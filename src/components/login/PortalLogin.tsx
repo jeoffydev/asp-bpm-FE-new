@@ -9,8 +9,19 @@ import { useLoginEmailTemplate } from '../../owner/EmailTemplate/useLoginEmailTe
 import ErrorListDisplayComponent from '../common/ErrorListDisplayComponent';
 import LoadingComponent from '../../global/LoadingComponent';
 import EmailSentMsgComponent from './../common/EmailSentMsgComponent';
+import { useNavigate } from 'react-router-dom';
+import Link from '@mui/material/Link';
+import { styled } from '@mui/material/styles';
+import { themeColours } from '../../utils/Helper';
 
-
+const LinkWrapper = styled(Link)(() => ({
+   fontSize: '1rem',
+   display: 'block',
+   marginTop: '0.5rem',
+   color: themeColours.blue,
+   textDecoration: 'none',
+   cursor: 'pointer'
+}));
 
    type Inputs = {
     email: string
@@ -18,6 +29,7 @@ import EmailSentMsgComponent from './../common/EmailSentMsgComponent';
   
 export default function PortalLogin() {
     const intl = useIntl();
+    const navigate = useNavigate();
     const [openError, setOpenError] = useState(false);
     const [emailTo, setEmailto] = useState('');
 
@@ -78,6 +90,12 @@ export default function PortalLogin() {
                     <InputLogin disabled={responsecheckAdminEmail?.isLoading} type='email' placeholder='Email Address' data-testid="emailPortalLogin" data-cy="emailPortalLogin" {...register("email", { required: true })} />
                     {errorForm.email && <ErrorLogin> {intl.formatMessage(msg.validationMessage.emailRequired)} </ErrorLogin>}
                     <ButtonLogin type='submit' className='theme-button' variant="contained"> {intl.formatMessage(msg.loginMessage.loginBtn)} </ButtonLogin>
+                    <LinkWrapper
+                        variant="body2" 
+                        onClick={()=>navigate('/forgot-password')}
+                    >
+                        {intl.formatMessage(msg.loginMessage.forgotPassword)}
+                    </LinkWrapper>
                 </form>
             )
         }

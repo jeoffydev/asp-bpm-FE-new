@@ -21,6 +21,8 @@ import { ProtectedOrgRouteComponent } from "./components/organization/Protectect
 import OrgCypressFinalLogin from "./components/login/OrgCypressFinalLogin";
 import EditAccountComponent from "./components/organization/body/EditAccountComponent";
 import AddPropertyComponent from "./components/organization/body/property/AddPropertyComponent";
+import ForgotPasswordComponent from "./components/login/ForgotPasswordComponent";
+import ForgotPasswordFinalComponent from "./components/login/ForgotPasswordFinalComponent";
 
 
 const RouteHolder = () => {
@@ -30,6 +32,8 @@ const RouteHolder = () => {
     <Routes>
         <Route path="/" element={<HomepageComponent />} />
         <Route path="/login" element={<LoginPageComponent />} />
+        <Route path="/forgot-password" element={<ForgotPasswordComponent />} />
+        <Route path="/forgot-password/continue/:secret" element={<ForgotPasswordFinalComponent />} />
         <Route path="/login/continue/:secret" element={<LoginPageFinalComponent />} />
         <Route path="/login/cypress/:secret" element={<OrgCypressFinalLogin />} />
 

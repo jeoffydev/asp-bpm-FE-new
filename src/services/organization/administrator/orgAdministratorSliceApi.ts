@@ -76,7 +76,23 @@ export const orgAdministratorSliceApi =  createApi({
             },
             invalidatesTags: ['orgAdmins'],
           }),
-       
+          forgotUserPasswordVerify: builder.query({
+            query: (secretKey: string) => {
+              return secretKey ? `${apiAdministratorUrl}/ForgotUserPassword/${secretKey}` : `${apiUrlNoresult}`
+            },
+            providesTags: ['orgAdmins'],
+          }),
+          forgotUserPasswordSubmit: builder.mutation({
+            query: (payload) => { 
+              const { ...body } = payload;
+              return {
+                url: `${apiAdministratorUrl}/ForgotUserPasswordSubmit`,
+                method: 'PUT',
+                body,
+              }
+            },
+            invalidatesTags: ['orgAdmins'],
+          }),
   }),
 })
 export const {
@@ -85,6 +101,8 @@ export const {
    useLoginOrgUserMutation,
    useGetUserOrganizationQuery,
    useUpdateUserDetailsMutation,
-   useUpdateUserPasswordMutation
+   useUpdateUserPasswordMutation,
+   useForgotUserPasswordVerifyQuery,
+   useForgotUserPasswordSubmitMutation
 } = orgAdministratorSliceApi
 

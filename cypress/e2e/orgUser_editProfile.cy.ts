@@ -61,4 +61,25 @@ describe('Org User spec', () => {
 
   })
 
+
+  it('Go to Dashboard org user and test the Edit Profile Update Password', () => {
+    //@ts-ignore
+    cy.loginOrgUser(Cypress.env('EMAILADMIN'), Cypress.env('PWADMIN'))
+    cy.get(OrgUserLoginPage.loginBtn).click({ force: true})
+    cy.wait(2500)
+    cy.visit('http://localhost:3000/portal/dashboard');
+    cy.get(OrgUserLoginPage.sidebarMenu).click({ force: true})
+    cy.wait(2500)
+    cy.get(OrgUserLoginPage.sidebarAvatar).click({ force: true})
+    cy.wait(1500)
+    cy.get('button').contains('Edit Profile').click({ force: true})
+    cy.wait(500)
+    cy.get('button').contains('Edit Details').should('exist');
+    cy.get('button').contains('Edit Password').should('exist')
+    cy.get('button').contains('Edit Password').click({ force: true})
+    cy.wait(2500)
+    cy.get('button').contains('Update Password').click({ force: true})
+    cy.contains('The Password field is required.').should('exist');
+  })
+
 })

@@ -147,6 +147,10 @@ export const loginMessage = defineMessages({
         id: `${prefix.loginId}.title.btnLogin`,
         defaultMessage: `Email a login link`
     },
+    resetPassword: {
+        id: `${prefix.loginId}.title.btnLogin`,
+        defaultMessage: `Reset Password`
+    },
     emailSent: {
         id: `${prefix.loginId}.title.emailSent`,
         defaultMessage: `Email Sent`
@@ -154,6 +158,10 @@ export const loginMessage = defineMessages({
     checkInbox: {
         id: `${prefix.loginId}.title.checkInbox`,
         defaultMessage: `Please check your inbox for the sign in link or sometimes this can land in SPAM!. If it doesn't arrive in a minute or three, please check again.`
+    },
+    checkInboxForgotPassword: {
+        id: `${prefix.loginId}.title.checkInboxForgotPassword`,
+        defaultMessage: `Please check your inbox for the reset password link or sometimes this can land in SPAM!. If it doesn't arrive in a minute or three, please check again.`
     },
     emailVerified: {
         id: `${prefix.loginId}.title.emailVerified`,
@@ -190,7 +198,19 @@ export const loginMessage = defineMessages({
     loginAgain: {
         id: `${prefix.loginId}.title.loginAgain`,
         defaultMessage: `Please login again.`
-    }
+    },
+    haveLogin: {
+        id: `${prefix.loginId}.title.loginAgain`,
+        defaultMessage: `I already have login.`
+    },
+    forgotPassword: {
+        id: `${prefix.loginId}.title.forgotPassword`,
+        defaultMessage: `Forgot password?`
+    },
+    backToLogin: {
+        id: `${prefix.loginId}.title.forgotPassword`,
+        defaultMessage: `Back to login`
+    },
     
 });
 
@@ -202,6 +222,18 @@ export const validationMessage = defineMessages({
     emailRequired: {
         id: `${prefix.validationId}.title.emailRequired`,
         defaultMessage: `Email Address is required`
+    },
+    pwOneRequired: {
+        id: `${prefix.validationId}.title.pwOneRequired`,
+        defaultMessage: `Password is required`
+    },
+     pwTwoRequired: {
+        id: `${prefix.validationId}.title.pwTwoRequired`,
+        defaultMessage: `Confirm Password is required`
+    },
+    passwordResetSuccessfully: {
+        id: `${prefix.validationId}.title.passwordResetSuccessfully`,
+        defaultMessage: `Password successfully changed.`
     },
 });
 
