@@ -108,10 +108,11 @@ function ForgotPasswordComponent() {
                        
                         <InputLogin type='email' placeholder='Email Address' data-testid="emailForgotOne" data-cy="emailForgotOne" {...register("email", { required: true })} />
                         {errorForm.email && <ErrorLogin> {intl.formatMessage(msg.validationMessage.emailRequired)} </ErrorLogin>}
-                        <ButtonLogin type='submit' className='theme-button' variant="contained"> {intl.formatMessage(msg.loginMessage.resetPassword)} </ButtonLogin>
+                        <ButtonLogin type='submit' className='theme-button' data-testid="forgotPwBtn" variant="contained"> {intl.formatMessage(msg.loginMessage.resetPassword)} </ButtonLogin>
                         <LinkWrapper
                             variant="body2" 
                             onClick={()=>navigate('/login')}
+                            data-testid="forgot-already-have-login"
                         >
                             {intl.formatMessage(msg.loginMessage.haveLogin)}
                         </LinkWrapper>

@@ -20,6 +20,14 @@ export  class OrgUserLoginPage
     static sidebarAvatar = '[data-testid="avatar-account"]';
 }
 
+export  class OrgUserForgotPasswordPage
+{
+    static emailField = 'input[type=email]';
+    static forgotBtn = '[data-testid="forgotPwBtn"]';
+    static emailForgotField = '[data-testid="emailForgotOne"]';
+    static alreadyHaveLogin = '[data-testid="forgot-already-have-login"]';
+}
+
 
 export class OwnerRegisterPage
 {
